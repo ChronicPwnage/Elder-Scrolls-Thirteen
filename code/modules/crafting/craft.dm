@@ -8,7 +8,8 @@
 				CAT_MISC,
 				CAT_PRIMAL,
 				CAT_FOOD,
-				CAT_CLOTHING)
+				CAT_CLOTHING,
+				CAT_SMITH)
 	var/list/subcategories = list(
 						list(	//Weapon subcategories
 							CAT_WEAPON,
@@ -30,7 +31,18 @@
 							CAT_SANDWICH,
 							CAT_SOUP,
 							CAT_SPAGHETTI),
-                        CAT_CLOTHING) //Clothing subcategories
+						 CAT_CLOTHING, //Clothing subcategories
+						list(	//Smithing subcategories
+							CAT_LEATHER,
+							CAT_IRON,
+							CAT_STEEL,
+							CAT_ELVEN,
+							CAT_DWARVEN,
+							CAT_ORCISH,
+							CAT_GLASS,
+							CAT_EBONY,
+							CAT_DRAGON)
+						)
 
 	var/datum/action/innate/crafting/button
 	var/display_craftable_only = FALSE
@@ -109,6 +121,15 @@
 				if(RC.is_drainable())
 					for(var/datum/reagent/A in RC.reagents.reagent_list)
 						.["other"][A.type] += A.volume
+			.["other"][I.type] += 1
+
+	for(var/obj/machinery/I in get_environment(user))
+		if(I.flags_1 & HOLOGRAM_1)
+			continue
+		else if(I.machine_tool_behaviour)
+			.["tool_behaviour"] += I.machine_tool_behaviour
+			.["other"][I.type] += 1
+		else
 			.["other"][I.type] += 1
 
 /datum/personal_crafting/proc/check_tools(mob/user, datum/crafting_recipe/R, list/contents)
@@ -317,7 +338,7 @@
 	var/list/cant_craft = list()
 	for(var/rec in GLOB.crafting_recipes)
 		var/datum/crafting_recipe/R = rec
-		
+
 		if(!R.always_availible && !(R.type in user?.mind?.learned_recipes)) //User doesn't actually know how to make this.
 			continue
 
