@@ -165,6 +165,38 @@
 	attack_verb = list("shanked", "shivved")
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 
+/obj/item/kitchen/knife/dagger
+	name = "iron dagger"
+	icon_state = "knife"
+	item_state = "knife"
+	desc = "A simple iron dagger, likely the work of a Smith's apprentice."
+	force = 15
+	throwforce = 20
+
+/obj/item/kitchen/knife/dagger/steel
+	name = "steel dagger"
+	icon_state = "knife"
+	item_state = "knife"
+	desc = "A small, yet potentially deadly steel dagger."
+	force = 20
+	throwforce = 25
+
+/obj/item/kitchen/knife/dagger/orcish
+	name = "orcish dagger"
+	icon_state = "knife"
+	item_state = "knife"
+	desc = "An imposing Orcish dagger. It looks rather intimidating for a small weapon."
+	force = 25
+	throwforce = 30
+
+/obj/item/kitchen/knife/dagger/dwarven
+	name = "dwarven dagger"
+	icon_state = "knife"
+	item_state = "knife"
+	desc = "A dagger forged from Dwarven metal, sturdy and deadly."
+	force = 30
+	throwforce = 35
+
 /obj/item/kitchen/rollingpin
 	name = "rolling pin"
 	desc = "Used to knock out the Bartender."
