@@ -127,7 +127,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	force = 40
 	throwforce = 20
 
-/obj/item/claymore/sword/imperial
+/obj/item/claymore/sword/steel/imperial
 	name = "imperial sword"
 	desc = "A standard issue Imperial sword."
 	icon_state = "claymore"
@@ -135,8 +135,6 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
 	hitsound = 'sound/weapons/bladeslice.ogg'
-	force = 35
-	throwforce = 15
 
 /obj/item/claymore/mace
 	name = "iron mace"
@@ -190,7 +188,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	armour_penetration = 40
 	throwforce = 15
 
-/obj/item/claymore/mace/imperial
+/obj/item/claymore/mace/steel/imperial
 	name = "imperial mace"
 	desc = "A standard issue Imperial mace."
 	icon_state = "claymore"
@@ -198,9 +196,6 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
 	hitsound = 'sound/weapons/bladeslice.ogg'
-	force = 25
-	armour_penetration = 30
-	throwforce = 10
 
 /obj/item/claymore/Initialize()
 	. = ..()
