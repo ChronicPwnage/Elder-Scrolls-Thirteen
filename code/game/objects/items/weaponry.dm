@@ -70,6 +70,69 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 50)
 	resistance_flags = FIRE_PROOF
 
+/obj/item/claymore/sword
+	name = "iron sword"
+	desc = "A simple iron sword."
+	icon_state = "claymore"
+	item_state = "claymore"
+	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
+	hitsound = 'sound/weapons/bladeslice.ogg'
+	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_BACK
+	force = 30
+	throwforce = 15
+	block_chance = 0
+
+/obj/item/claymore/sword/steel
+	name = "steel sword"
+	desc = "A well forged steel sword."
+	icon_state = "claymore"
+	item_state = "claymore"
+	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
+	hitsound = 'sound/weapons/bladeslice.ogg'
+	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_BACK
+	force = 35
+	throwforce = 15
+
+/obj/item/claymore/sword/orcish
+	name = "orcish sword"
+	desc = "A sharp and deadly Orcish sword."
+	icon_state = "claymore"
+	item_state = "claymore"
+	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
+	hitsound = 'sound/weapons/bladeslice.ogg'
+	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_BACK
+	force = 40
+	throwforce = 20
+
+/obj/item/claymore/sword/dwarven
+	name = "dwarven sword"
+	desc = "A lethal sword made from strong Dwarven metal."
+	icon_state = "claymore"
+	item_state = "claymore"
+	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
+	hitsound = 'sound/weapons/bladeslice.ogg'
+	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_BACK
+	force = 45
+	throwforce = 20
+
+/obj/item/claymore/sword/scimitar
+	name = "scimitar"
+	desc = "A signature Alik'r scimitar."
+	icon_state = "claymore"
+	item_state = "claymore"
+	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
+	hitsound = 'sound/weapons/bladeslice.ogg'
+	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_BACK
+	force = 40
+	throwforce = 20
+
+
+
 /obj/item/claymore/Initialize()
 	. = ..()
 	AddComponent(/datum/component/butchering, 40, 105)
