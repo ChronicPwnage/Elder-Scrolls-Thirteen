@@ -1,30 +1,43 @@
 /obj/item/shield
 	name = "shield"
+	icon = 'icons/obj/shields.dmi'
+	lefthand_file = 'icons/mob/inhands/equipment/shields_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/shields_righthand.dmi'
 	block_chance = 50
+	slowdown = 0
 	armor = list("melee" = 50, "bullet" = 50, "laser" = 50, "energy" = 0, "bomb" = 30, "bio" = 0, "rad" = 0, "fire" = 80, "acid" = 70)
+	attack_verb = list("shoved", "bashed")
+	w_class = WEIGHT_CLASS_BULKY
+	slot_flags = ITEM_SLOT_BACK
+	max_integrity = 200
+	var/cooldown = 0
+	var/shield_type = "kite"
+	var/main_material = "iron"
+	var/materials_deconstruct = list(MAT_IRON=4, MAT_LEATHER=2)
 	var/transparent = FALSE	// makes beam projectiles pass through the shield
+	var/broken_shield = "/obj/item/shield/broken" // the broken version of the shield, to drop upon breaking
 
 /obj/item/shield/proc/on_shield_block(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", damage = 0, attack_type = MELEE_ATTACK)
 	return TRUE
 
-/obj/item/shield/riot
-	name = "riot shield"
-	desc = "A shield adept at blocking blunt objects from connecting with the torso of the shield wielder."
-	icon = 'icons/obj/items_and_weapons.dmi'
-	icon_state = "riot"
-	lefthand_file = 'icons/mob/inhands/equipment/shields_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/equipment/shields_righthand.dmi'
-	slot_flags = ITEM_SLOT_BACK
-	force = 10
-	throwforce = 5
-	throw_speed = 2
-	throw_range = 3
-	w_class = WEIGHT_CLASS_BULKY
-	materials = list(MAT_GLASS=7500, MAT_METAL=1000)
-	attack_verb = list("shoved", "bashed")
-	var/cooldown = 0 //shield bash cooldown. based on world.time
-	transparent = TRUE
-	max_integrity = 75
+/obj/item/shield/on_shield_block(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", damage = 0, attack_type = MELEE_ATTACK)
+	if (obj_integrity <= damage)
+		var/turf/T = get_turf(owner)
+		T.visible_message("<span class='warning'>[hitby] destroys [src]!</span>")
+		shield_break(owner)
+		qdel(src)
+		return FALSE
+	take_damage(damage)
+	return ..()
+
+/obj/item/shield/broken
+	name = "broken shield"
+	icon_state = "shield_broken"
+	block_chance = 10
+	force = 5
+	materials_deconstruct = list(MAT_IRON=1, MAT_LEATHER=1)
+	main_material = "iron"
+	max_integrity = 100
 
 /obj/item/shield/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
 	if(transparent && (hitby.pass_flags & PASSGLASS))
@@ -35,24 +48,33 @@
 		final_block_chance = 100
 	return ..()
 
-/obj/item/shield/riot/attackby(obj/item/W, mob/user, params)
+/obj/item/shield/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/melee/baton))
 		if(cooldown < world.time - 25)
 			user.visible_message("<span class='warning'>[user] bashes [src] with [W]!</span>")
 			playsound(user.loc, 'sound/effects/shieldbash.ogg', 50, 1)
 			cooldown = world.time
+	/*
+	//TODO: In-the-field shield repair?
 	else if(istype(W, /obj/item/stack/sheet/mineral/titanium))
 		if (obj_integrity >= max_integrity)
 			to_chat(user, "<span class='notice'>[src] is already in perfect condition.</span>")
-		else
+		 else
 			var/obj/item/stack/sheet/mineral/titanium/T = W
 			T.use(1)
 			obj_integrity = max_integrity
 			to_chat(user, "<span class='notice'>You repair [src] with [T].</span>")
+	*/
 	else
 		return ..()
 
-/obj/item/shield/riot/examine(mob/user)
+
+
+/obj/item/shield/proc/shield_break(mob/living/carbon/human/owner)
+	//playsound(owner, 'sound/effects/glassbr3.ogg', 100) //TODO: Replace, make it play for everyone
+	new broken_shield((get_turf(src)))
+
+/obj/item/shield/examine(mob/user)
 	..()
 	var/healthpercent = round((obj_integrity/max_integrity) * 100, 1)
 	switch(healthpercent)
@@ -63,19 +85,65 @@
 		if(0 to 25)
 			to_chat(user, "<span class='warning'>It's falling apart!</span>")
 
-/obj/item/shield/riot/proc/shatter(mob/living/carbon/human/owner)
-	playsound(owner, 'sound/effects/glassbr3.ogg', 100)
-	new /obj/item/shard((get_turf(src)))
+								/////	KITESHIELDS	/////
+								/////	IRON KITESHIELD	/////
+/obj/item/shield/kite/iron
+	shield_type = "kite"
+	name = "iron kiteshield"
+	desc = "A mid-sized shield that balances mobility and protection. This one is made out of iron."
+	icon_state = "kiteshield_iron"
+	block_chance = 50
+	slowdown = 0.5
+	force = 25
+	throwforce = 10
+	throw_speed = 2
+	throw_range = 3
+	materials_deconstruct = list(MAT_IRON=5, MAT_LEATHER=2)
+	main_material = "iron"
+	max_integrity = 200
+	broken_shield = "/obj/item/shield/kite/iron/broken" // the broken version of the shield, to drop upon breaking
 
-/obj/item/shield/riot/on_shield_block(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", damage = 0, attack_type = MELEE_ATTACK)
-	if (obj_integrity <= damage)
-		var/turf/T = get_turf(owner)
-		T.visible_message("<span class='warning'>[hitby] destroys [src]!</span>")
-		shatter(owner)
-		qdel(src)
-		return FALSE
-	take_damage(damage)
-	return ..()
+/obj/item/shield/kite/iron/broken
+	name = "broken iron kiteshield"
+	desc = "A mid-sized shield that balances mobility and protection. This one is made out of iron, and is broken beyond any use as a shield and must be repaired."
+	icon_state = "kiteshield_iron"
+	block_chance = 0
+	force = 10
+	materials_deconstruct = list(MAT_IRON=1, MAT_LEATHER=1)
+/*
+/obj/item/shield/kite/proc/shield_break(mob/living/carbon/human/owner)
+	//playsound(owner, 'sound/effects/glassbr3.ogg', 100) //TODO: Replace, make it play for everyone
+	new /obj/item/shield/kite/iron/broken((get_turf(src)))
+*/
+									/////	STEEL KITESHIELD	/////
+
+									/////	ORCISH KITESHIELD	/////
+
+									/////	DWEMER KITESHIELD	/////
+
+									/////	SQUARE SHIELDS	/////
+/obj/item/shield/square/iron
+	shield_type = "square"
+	name = "iron square shield"
+	desc = "A large-sized shield that sacrifices mobility for protection. This one is made out of iron."
+	icon_state = "squareshield_iron"
+	block_chance = 70
+	slowdown = 1
+	force = 15
+	throwforce = 10
+	throw_speed = 2
+	throw_range = 1
+	materials_deconstruct = list(MAT_IRON=7, MAT_LEATHER=2)
+	main_material = "iron"
+	max_integrity = 300
+
+/obj/item/shield/kite/iron/broken
+	name = "broken iron kiteshield"
+	desc = "A mid-sized shield that balances mobility and protection. This one is made out of iron, and is broken beyond any use as a shield and must be repaired."
+	icon_state = "kiteshield_iron"
+	block_chance = 0
+	force = 10
+	materials_deconstruct = list(MAT_IRON=1, MAT_LEATHER=1)
 
 /obj/item/shield/riot/roman
 	name = "\improper Roman shield"
@@ -85,7 +153,7 @@
 	lefthand_file = 'icons/mob/inhands/equipment/shields_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/shields_righthand.dmi'
 	transparent = FALSE
-	materials = list(MAT_METAL=8500)
+	materials_deconstruct = list(MAT_METAL=8500)
 	max_integrity = 65
 
 /obj/item/shield/riot/roman/fake
@@ -94,7 +162,7 @@
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	max_integrity = 30
 
-/obj/item/shield/riot/roman/shatter(mob/living/carbon/human/owner)
+/obj/item/shield/riot/roman/shield_break(mob/living/carbon/human/owner)
 	playsound(owner, 'sound/effects/grillehit.ogg', 100)
 	new /obj/item/stack/sheet/metal(get_turf(src))
 
@@ -105,14 +173,14 @@
 	item_state = "buckler"
 	lefthand_file = 'icons/mob/inhands/equipment/shields_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/shields_righthand.dmi'
-	materials = list()
+	materials_deconstruct = list()
 	resistance_flags = FLAMMABLE
 	block_chance = 30
 	transparent = FALSE
 	max_integrity = 55
 	w_class = WEIGHT_CLASS_NORMAL
 
-/obj/item/shield/riot/buckler/shatter(mob/living/carbon/human/owner)
+/obj/item/shield/riot/buckler/shield_break(mob/living/carbon/human/owner)
 	playsound(owner, 'sound/effects/bang.ogg', 50)
 	new /obj/item/stack/sheet/mineral/wood(get_turf(src))
 
@@ -232,7 +300,7 @@
 
 /obj/item/shield/riot/tele
 	name = "telescopic shield"
-	desc = "An advanced riot shield made of lightweight materials that collapses for easy storage."
+	desc = "An advanced riot shield made of lightweight materials_deconstruct that collapses for easy storage."
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "teleriot0"
 	lefthand_file = 'icons/mob/inhands/equipment/shields_lefthand.dmi'
