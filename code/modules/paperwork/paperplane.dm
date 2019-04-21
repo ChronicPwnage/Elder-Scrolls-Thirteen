@@ -125,9 +125,12 @@
 
 /obj/item/paper/examine(mob/user)
 	..()
-	to_chat(user, "<span class='notice'>Alt-click [src] to fold it into a paper plane.</span>")
+	if(sealed == 0)
+		to_chat(user, "<span class='notice'>Alt-click [src] to fold it into a paper plane.</span>")
 
 /obj/item/paper/AltClick(mob/living/carbon/user, obj/item/I)
+	if(sealed == 1)
+		return
 	if(!istype(user) || !user.canUseTopic(src, BE_CLOSE, ismonkey(user)))
 		return
 	to_chat(user, "<span class='notice'>You fold [src] into the shape of a plane!</span>")
