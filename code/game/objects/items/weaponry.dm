@@ -146,7 +146,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	slot_flags = ITEM_SLOT_BELT
 	force = 20
-	armour_penetration = 25
+	armour_penetration = 30
 	throwforce = 10
 	attack_verb = list("bashed", "bludgeoned", "hit", "struck", "beat")
 	block_chance = 0
@@ -161,7 +161,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	force = 25
-	armour_penetration = 30
+	armour_penetration = 35
 	throwforce = 10
 
 /obj/item/claymore/mace/orcish
@@ -173,7 +173,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	force = 30
-	armour_penetration = 35
+	armour_penetration = 40
 	throwforce = 15
 
 /obj/item/claymore/mace/dwarven
@@ -185,7 +185,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	force = 35
-	armour_penetration = 40
+	armour_penetration = 45
 	throwforce = 15
 
 /obj/item/claymore/mace/steel/imperial
@@ -339,7 +339,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	lefthand_file = 'icons/mob/inhands/equipment/hydroponics_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/hydroponics_righthand.dmi'
 	force = 25
-	armour_penetration = 10
+	armour_penetration = 15
 	w_class = WEIGHT_CLASS_NORMAL
 	throwforce = 30
 	throw_speed = 3
@@ -354,7 +354,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	lefthand_file = 'icons/mob/inhands/equipment/hydroponics_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/hydroponics_righthand.dmi'
 	force = 30
-	armour_penetration = 15
+	armour_penetration = 20
 	throwforce = 35
 
 /obj/item/hatchet/waraxe/orcish
@@ -366,7 +366,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	lefthand_file = 'icons/mob/inhands/equipment/hydroponics_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/hydroponics_righthand.dmi'
 	force = 35
-	armour_penetration = 20
+	armour_penetration = 25
 	throwforce = 40
 
 /obj/item/hatchet/waraxe/dwarven
@@ -378,7 +378,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	lefthand_file = 'icons/mob/inhands/equipment/hydroponics_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/hydroponics_righthand.dmi'
 	force = 40
-	armour_penetration = 25
+	armour_penetration = 30
 	throwforce = 45
 
 /obj/item/katana
