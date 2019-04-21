@@ -9,6 +9,7 @@
 	interaction_flags_machine = INTERACT_MACHINE_OPEN | INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OFFLINE
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	circuit = /obj/item/circuitboard/machine/chem_dispenser
+	var/alchemy = FALSE
 	var/obj/item/stock_parts/cell/cell
 	var/powerefficiency = 0.1
 	var/amount = 30
@@ -81,7 +82,7 @@
 	..()
 	if(panel_open)
 		to_chat(user, "<span class='notice'>[src]'s maintenance hatch is open!</span>")
-	if(in_range(user, src) || isobserver(user))
+	if((in_range(user, src) || isobserver(user)) && alchemy == FALSE)
 		to_chat(user, "<span class='notice'>The status display reads: <br>Recharging <b>[recharge_amount]</b> power units per interval.<br>Power efficiency increased by <b>[round((powerefficiency*1000)-100, 1)]%</b>.<br>Macro granularity at <b>[macroresolution]u</b>.<span>")
 
 /obj/machinery/chem_dispenser/process()
@@ -597,4 +598,40 @@
 	component_parts += new /obj/item/stock_parts/manipulator/femto(null)
 	component_parts += new /obj/item/stack/sheet/glass(null)
 	component_parts += new /obj/item/stock_parts/cell/bluespace(null)
+	RefreshParts()
+
+/obj/machinery/chem_dispenser/alchemy
+	name = "alchemy lab"
+	desc = "Contains a large reservoir of alchemical reagents."
+	flags_1 = NODECONSTRUCT_1
+	alchemy = TRUE
+	dispensable_reagents = list(
+		"wheat",
+		"blisterwort",
+		"skeevermeat",
+		"mudcrabchitin",
+		"mountainflowers",
+		"hangingmoss",
+		"deathbell",
+		"bearmeat",
+		"nirnroot",
+		"mammothtusk",
+		"flyamanita",
+		"chauruseggs",
+		"spidermeat"
+	)
+	upgrade_reagents = null
+	emagged_reagents = null
+
+
+/obj/machinery/chem_dispenser/alchemy/Initialize()
+	. = ..()
+	component_parts = list()
+	component_parts += new /obj/item/circuitboard/machine/chem_dispenser(null)
+	component_parts += new /obj/item/stock_parts/matter_bin(null)
+	component_parts += new /obj/item/stock_parts/matter_bin(null)
+	component_parts += new /obj/item/stock_parts/capacitor(null)
+	component_parts += new /obj/item/stock_parts/manipulator(null)
+	component_parts += new /obj/item/stack/sheet/glass(null)
+	component_parts += new /obj/item/stock_parts/cell/upgraded(null)
 	RefreshParts()

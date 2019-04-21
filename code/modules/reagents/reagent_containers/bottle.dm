@@ -2,7 +2,7 @@
 
 /obj/item/reagent_containers/glass/bottle
 	name = "bottle"
-	desc = "A small bottle."
+	desc = "A small potion bottle."
 	icon_state = "bottle"
 	item_state = "atoxinbottle"
 	possible_transfer_amounts = list(5,10,15,25,30)
