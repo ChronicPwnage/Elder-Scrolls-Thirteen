@@ -7,6 +7,10 @@
 #Ignore byond config folder.
 /cfg/**/*
 
+/config/dbconfig.txt
+/config/admins.txt
+/config/comms.txt
+
 #Ignore compiled files and other files generated during compilation.
 *.mdme
 *.dmb
