@@ -77,8 +77,8 @@
 #define MAT_LEATHER		"$leather"
 #define MAT_CORUNDUM	"$corundum"
 #define MAT_ELVEN		"$moonstone"
-#define MAT_DWARVEN		"$dwarven metal"
 #define MAT_ORCISH		"$orichalcum"
+#define MAT_DWARVEN		"$dwarven metal"
 #define MAT_MALACHITE	"$malachite" //to avoid conflict with MAT_GLASS
 #define MAT_EBONY		"$ebony"
 #define MAT_DRAGON		"$dragonscales"

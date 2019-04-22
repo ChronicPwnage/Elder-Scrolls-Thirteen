@@ -181,19 +181,19 @@
 	force = 20
 	throwforce = 25
 
-/obj/item/kitchen/knife/dagger/dwarven
-	name = "dwarven dagger"
-	icon_state = "knife"
-	item_state = "knife"
-	desc = "A dagger forged from Dwarven metal, sturdy and deadly."
-	force = 25
-	throwforce = 30
-
 /obj/item/kitchen/knife/dagger/orcish
 	name = "orcish dagger"
 	icon_state = "knife"
 	item_state = "knife"
-	desc = "An imposing Orcish dagger. It looks rather intimidating for a small weapon."
+	desc = "An imposing Orcish dagger. It looks rather intimidating for a small weapon.
+	force = 25
+	throwforce = 30
+
+/obj/item/kitchen/knife/dagger/dwarven
+	name = "dwarven dagger"
+	icon_state = "knife"
+	item_state = "knife"
+	desc = "A dagger forged from Dwarven metal, sturdy and deadly.""
 	force = 30
 	throwforce = 35
 

@@ -39,8 +39,8 @@
 							"Iron",
 							"Steel",
 							"Elven",
-							"Dwarven",
 							"Orcish",
+							"Dwarven",
 							"Malachite",
 							"Ebony",
 							"Dragon",
@@ -49,7 +49,7 @@
 							)
 
 /obj/machinery/autolathe/Initialize()
-	AddComponent(/datum/component/material_container, list(MAT_METAL, MAT_GLASS, MAT_LEATHER, MAT_CORUNDUM, MAT_ELVEN, MAT_DWARVEN, MAT_ORCISH, MAT_MALACHITE, MAT_EBONY, MAT_DRAGON), 0, TRUE, null, null, CALLBACK(src, .proc/AfterMaterialInsert))
+	AddComponent(/datum/component/material_container, list(MAT_METAL, MAT_GLASS, MAT_LEATHER, MAT_CORUNDUM, MAT_ELVEN, MAT_ORCISH, MAT_DWARVEN, MAT_MALACHITE, MAT_EBONY, MAT_DRAGON), 0, TRUE, null, null, CALLBACK(src, .proc/AfterMaterialInsert))
 	. = ..()
 
 	wires = new /datum/wires/autolathe(src)
@@ -158,8 +158,8 @@
 			var/leather_cost = being_built.materials[MAT_LEATHER]
 			var/corundum_cost = being_built.materials[MAT_CORUNDUM]
 			var/elven_cost = being_built.materials[MAT_ELVEN]
-			var/dwarven_cost = being_built.materials[MAT_DWARVEN]
 			var/orcish_cost = being_built.materials[MAT_ORCISH]
+			var/dwarven_cost = being_built.materials[MAT_DWARVEN]
 			var/malachite_cost = being_built.materials[MAT_MALACHITE]
 			var/ebony_cost = being_built.materials[MAT_EBONY]
 			var/dragon_cost = being_built.materials[MAT_DRAGON]
@@ -173,8 +173,8 @@
 				) &&  (materials.amount(MAT_LEATHER) >= leather_cost*multiplier*coeff
 				) &&  (materials.amount(MAT_CORUNDUM) >= corundum_cost*multiplier*coeff
 				) &&  (materials.amount(MAT_ELVEN) >= elven_cost*multiplier*coeff
-				) &&  (materials.amount(MAT_DWARVEN) >= dwarven_cost*multiplier*coeff
 				) &&  (materials.amount(MAT_ORCISH) >= orcish_cost*multiplier*coeff
+				) &&  (materials.amount(MAT_DWARVEN) >= dwarven_cost*multiplier*coeff
 				) &&  (materials.amount(MAT_MALACHITE) >= malachite_cost*multiplier*coeff
 				) &&  (materials.amount(MAT_EBONY) >= ebony_cost*multiplier*coeff
 				) &&  (materials.amount(MAT_DRAGON) >= dragon_cost*multiplier*coeff
@@ -183,8 +183,8 @@
 				use_power(power)
 				icon_state = "forge_n"
 				var/time = is_stack ? 32 : (32 * coeff * multiplier) ** 0.8
-				addtimer(CALLBACK(src, .proc/make_item, power, metal_cost, glass_cost, leather_cost, corundum_cost, elven_cost, dwarven_cost,
-														 orcish_cost, malachite_cost, ebony_cost, dragon_cost, multiplier, coeff, is_stack), time)
+				addtimer(CALLBACK(src, .proc/make_item, power, metal_cost, glass_cost, leather_cost, corundum_cost, elven_cost, orcish_cost,
+														 dwarven_cost, malachite_cost, ebony_cost, dragon_cost, multiplier, coeff, is_stack), time)
 
 		if(href_list["search"])
 			matching_designs.Cut()
@@ -201,8 +201,8 @@
 
 	return
 
-/obj/machinery/autolathe/proc/make_item(power, metal_cost, glass_cost, leather_cost, corundum_cost, elven_cost, dwarven_cost,
-														 orcish_cost, malachite_cost, ebony_cost, dragon_cost, multiplier, coeff, is_stack)
+/obj/machinery/autolathe/proc/make_item(power, metal_cost, glass_cost, leather_cost, corundum_cost, elven_cost, orcish_cost,
+														 dwarven_cost, malachite_cost, ebony_cost, dragon_cost, multiplier, coeff, is_stack)
 	GET_COMPONENT(materials, /datum/component/material_container)
 	var/atom/A = drop_location()
 	use_power(power)
@@ -211,8 +211,8 @@
 									MAT_LEATHER=leather_cost*coeff*multiplier,
 									MAT_CORUNDUM=corundum_cost*coeff*multiplier,
 									MAT_ELVEN=elven_cost*coeff*multiplier,
-									MAT_DWARVEN=dwarven_cost*coeff*multiplier,
 									MAT_ORCISH=orcish_cost*coeff*multiplier,
+									MAT_DWARVEN=dwarven_cost*coeff*multiplier,
 									MAT_MALACHITE=malachite_cost*coeff*multiplier,
 									MAT_EBONY=ebony_cost*coeff*multiplier,
 									MAT_DRAGON=dragon_cost*coeff*multiplier)
@@ -292,8 +292,8 @@
 			D.materials[MAT_LEATHER]?round(materials.amount(MAT_LEATHER)/D.materials[MAT_LEATHER]):INFINITY,
 			D.materials[MAT_CORUNDUM]?round(materials.amount(MAT_CORUNDUM)/D.materials[MAT_CORUNDUM]):INFINITY,
 			D.materials[MAT_ELVEN]?round(materials.amount(MAT_ELVEN)/D.materials[MAT_ELVEN]):INFINITY,
-			D.materials[MAT_DWARVEN]?round(materials.amount(MAT_DWARVEN)/D.materials[MAT_DWARVEN]):INFINITY,
 			D.materials[MAT_ORCISH]?round(materials.amount(MAT_ORCISH)/D.materials[MAT_ORCISH]):INFINITY,
+			D.materials[MAT_DWARVEN]?round(materials.amount(MAT_DWARVEN)/D.materials[MAT_DWARVEN]):INFINITY,
 			D.materials[MAT_MALACHITE]?round(materials.amount(MAT_MALACHITE)/D.materials[MAT_MALACHITE]):INFINITY,
 			D.materials[MAT_EBONY]?round(materials.amount(MAT_EBONY)/D.materials[MAT_EBONY]):INFINITY,
 			D.materials[MAT_DRAGON]?round(materials.amount(MAT_DRAGON)/D.materials[MAT_DRAGON]):INFINITY
@@ -334,8 +334,8 @@
 			D.materials[MAT_LEATHER]?round(materials.amount(MAT_LEATHER)/D.materials[MAT_LEATHER]):INFINITY,
 			D.materials[MAT_CORUNDUM]?round(materials.amount(MAT_CORUNDUM)/D.materials[MAT_CORUNDUM]):INFINITY,
 			D.materials[MAT_ELVEN]?round(materials.amount(MAT_ELVEN)/D.materials[MAT_ELVEN]):INFINITY,
-			D.materials[MAT_DWARVEN]?round(materials.amount(MAT_DWARVEN)/D.materials[MAT_DWARVEN]):INFINITY,
 			D.materials[MAT_ORCISH]?round(materials.amount(MAT_ORCISH)/D.materials[MAT_ORCISH]):INFINITY,
+			D.materials[MAT_DWARVEN]?round(materials.amount(MAT_DWARVEN)/D.materials[MAT_DWARVEN]):INFINITY,
 			D.materials[MAT_MALACHITE]?round(materials.amount(MAT_MALACHITE)/D.materials[MAT_MALACHITE]):INFINITY,
 			D.materials[MAT_EBONY]?round(materials.amount(MAT_EBONY)/D.materials[MAT_EBONY]):INFINITY,
 			D.materials[MAT_DRAGON]?round(materials.amount(MAT_DRAGON)/D.materials[MAT_DRAGON]):INFINITY
@@ -378,9 +378,9 @@
 		return FALSE
 	if(D.materials[MAT_ELVEN] && (materials.amount(MAT_ELVEN) < (D.materials[MAT_ELVEN] * coeff * amount)))
 		return FALSE
-	if(D.materials[MAT_DWARVEN] && (materials.amount(MAT_DWARVEN) < (D.materials[MAT_DWARVEN] * coeff * amount)))
-		return FALSE
 	if(D.materials[MAT_ORCISH] && (materials.amount(MAT_ORCISH) < (D.materials[MAT_ORCISH] * coeff * amount)))
+		return FALSE
+	if(D.materials[MAT_DWARVEN] && (materials.amount(MAT_DWARVEN) < (D.materials[MAT_DWARVEN] * coeff * amount)))
 		return FALSE
 	if(D.materials[MAT_MALACHITE] && (materials.amount(MAT_MALACHITE) < (D.materials[MAT_MALACHITE] * coeff * amount)))
 		return FALSE
@@ -403,10 +403,10 @@
 		dat += "[D.materials[MAT_CORUNDUM] * coeff] corundum "
 	if(D.materials[MAT_ELVEN])
 		dat += "[D.materials[MAT_ELVEN] * coeff] moonstone "
-	if(D.materials[MAT_DWARVEN])
-		dat += "[D.materials[MAT_DWARVEN] * coeff] dwarven metal "
 	if(D.materials[MAT_ORCISH])
 		dat += "[D.materials[MAT_ORCISH] * coeff] orichalcum "
+	if(D.materials[MAT_DWARVEN])
+		dat += "[D.materials[MAT_DWARVEN] * coeff] dwarven metal "
 	if(D.materials[MAT_MALACHITE])
 		dat += "[D.materials[MAT_MALACHITE] * coeff] malachite "
 	if(D.materials[MAT_EBONY])

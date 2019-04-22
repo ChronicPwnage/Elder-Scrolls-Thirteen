@@ -46,15 +46,6 @@
 	merge_type = /obj/item/stack/sheet/mineral/TES/elven
 	materials = list(MAT_ELVEN=MINERAL_MATERIAL_AMOUNT)
 
-/obj/item/stack/sheet/mineral/TES/dwarven
-	name = "dwarven ingots"
-	icon_state = "sheet-brass" //needs sprites
-	item_state = "sheet-brass" //needs sprites
-	singular_name = "dwarven ingot"
-	sheettype = "dwarveningot"
-	merge_type = /obj/item/stack/sheet/mineral/TES/dwarven
-	materials = list(MAT_DWARVEN=MINERAL_MATERIAL_AMOUNT)
-
 /obj/item/stack/sheet/mineral/TES/orcish
 	name = "orcish ingots"
 	icon_state = "sheet-uranium" //needs sprites
@@ -63,6 +54,15 @@
 	sheettype = "orcishingot"
 	merge_type = /obj/item/stack/sheet/mineral/TES/orcish
 	materials = list(MAT_ORCISH=MINERAL_MATERIAL_AMOUNT)
+
+/obj/item/stack/sheet/mineral/TES/dwarven
+	name = "dwarven ingots"
+	icon_state = "sheet-brass" //needs sprites
+	item_state = "sheet-brass" //needs sprites
+	singular_name = "dwarven ingot"
+	sheettype = "dwarveningot"
+	merge_type = /obj/item/stack/sheet/mineral/TES/dwarven
+	materials = list(MAT_DWARVEN=MINERAL_MATERIAL_AMOUNT)
 
 /obj/item/stack/sheet/mineral/TES/glass
 	name = "refined malachite"

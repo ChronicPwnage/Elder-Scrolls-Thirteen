@@ -15,7 +15,7 @@
 
 /obj/machinery/mineral/mint/Initialize()
 	. = ..()
-	AddComponent(/datum/component/material_container, list(MAT_METAL, MAT_GLASS, MAT_LEATHER, MAT_CORUNDUM, MAT_ELVEN, MAT_DWARVEN, MAT_ORCISH, MAT_MALACHITE, MAT_EBONY, MAT_DRAGON), MINERAL_MATERIAL_AMOUNT * 50, FALSE, /obj/item/stack)
+	AddComponent(/datum/component/material_container, list(MAT_METAL, MAT_GLASS, MAT_LEATHER, MAT_CORUNDUM, MAT_ELVEN, MAT_ORCISH, MAT_DWARVEN, MAT_MALACHITE, MAT_EBONY, MAT_DRAGON), MINERAL_MATERIAL_AMOUNT * 50, FALSE, /obj/item/stack)
 
 /obj/machinery/mineral/mint/process()
 	var/turf/T = get_step(src, input_dir)

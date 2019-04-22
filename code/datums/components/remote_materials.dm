@@ -54,7 +54,7 @@ handles linking back and forth.
 /datum/component/remote_materials/proc/_MakeLocal()
 	silo = null
 	mat_container = parent.AddComponent(/datum/component/material_container,
-		list(MAT_METAL, MAT_GLASS, MAT_LEATHER, MAT_CORUNDUM, MAT_ELVEN, MAT_DWARVEN, MAT_ORCISH, MAT_MALACHITE, MAT_EBONY, MAT_DRAGON),
+		list(MAT_METAL, MAT_GLASS, MAT_LEATHER, MAT_CORUNDUM, MAT_ELVEN, MAT_ORCISH, MAT_DWARVEN, MAT_MALACHITE, MAT_EBONY, MAT_DRAGON),
 		local_size,
 		FALSE,
 		/obj/item/stack)

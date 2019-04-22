@@ -333,21 +333,21 @@
 	category = list("initial", "Materials")
 	maxstack = 50
 
-/datum/design/dwarven
-	name = "Dwarven Ingot"
-	id = "dwarven"
-	build_type = AUTOLATHE
-	materials = list(MAT_DWARVEN = MINERAL_MATERIAL_AMOUNT)
-	build_path = /obj/item/stack/sheet/mineral/TES/dwarven
-	category = list("initial", "Materials")
-	maxstack = 50
-
 /datum/design/orcish
 	name = "Orichalcum Ingot"
 	id = "orcish"
 	build_type = AUTOLATHE
 	materials = list(MAT_ORCISH = MINERAL_MATERIAL_AMOUNT)
 	build_path = /obj/item/stack/sheet/mineral/TES/orcish
+	category = list("initial", "Materials")
+	maxstack = 50
+
+/datum/design/dwarven
+	name = "Dwarven Ingot"
+	id = "dwarven"
+	build_type = AUTOLATHE
+	materials = list(MAT_DWARVEN = MINERAL_MATERIAL_AMOUNT)
+	build_path = /obj/item/stack/sheet/mineral/TES/dwarven
 	category = list("initial", "Materials")
 	maxstack = 50
 

@@ -16,7 +16,7 @@ GLOBAL_LIST_EMPTY(silo_access_logs)
 /obj/machinery/ore_silo/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/material_container,
-		list(MAT_METAL, MAT_GLASS, MAT_LEATHER, MAT_CORUNDUM, MAT_ELVEN, MAT_DWARVEN, MAT_ORCISH, MAT_MALACHITE, MAT_EBONY, MAT_DRAGON),
+		list(MAT_METAL, MAT_GLASS, MAT_LEATHER, MAT_CORUNDUM, MAT_ELVEN, MAT_ORCISH, MAT_DWARVEN, MAT_MALACHITE, MAT_EBONY, MAT_DRAGON),
 		INFINITY,
 		FALSE,
 		/obj/item/stack,

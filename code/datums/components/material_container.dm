@@ -409,13 +409,13 @@
 	name = "Moonstone"
 	id = MAT_ELVEN
 
-/datum/material/dwarven
-	name = "Dwarven metal"
-	id = MAT_DWARVEN
-
 /datum/material/orcish
 	name = "Orichalcum"
 	id = MAT_ORCISH
+
+/datum/material/dwarven
+	name = "Dwarven metal"
+	id = MAT_DWARVEN
 
 /datum/material/malachite
 	name = "Malachite"

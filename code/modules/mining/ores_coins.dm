@@ -203,19 +203,19 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	singular_name = "moonstone ore chunk"
 	materials = list(MAT_ELVEN=MINERAL_MATERIAL_AMOUNT)
 
-/obj/item/stack/ore/dwarven
-	name = "dwarven scrap"
-	icon_state = "construction_drone_off" //needs sprites
-	item_state = "construction_drone_off" //needs sprites
-	singular_name = "dwarven scrap chunk"
-	materials = list(MAT_DWARVEN=MINERAL_MATERIAL_AMOUNT)
-
 /obj/item/stack/ore/orcish
 	name = "oricalchum ore"
 	icon_state = "Uranium ore" //needs sprites
 	item_state = "Uranium ore" //needs sprites
 	singular_name = "oricalchum ingot"
 	materials = list(MAT_ORCISH=MINERAL_MATERIAL_AMOUNT)
+
+/obj/item/stack/ore/dwarven
+	name = "dwarven scrap"
+	icon_state = "construction_drone_off" //needs sprites
+	item_state = "construction_drone_off" //needs sprites
+	singular_name = "dwarven scrap chunk"
+	materials = list(MAT_DWARVEN=MINERAL_MATERIAL_AMOUNT)
 
 /obj/item/stack/ore/malachite
 	name = "malachite ore"

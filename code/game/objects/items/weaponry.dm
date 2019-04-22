@@ -94,9 +94,9 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	force = 35
 	throwforce = 15
 
-/obj/item/claymore/sword/dwarven
-	name = "dwarven sword"
-	desc = "A lethal sword made from strong Dwarven metal."
+/obj/item/claymore/sword/orcish
+	name = "orcish sword"
+	desc = "A sharp and deadly Orcish sword."
 	icon_state = "claymore"
 	item_state = "claymore"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
@@ -105,9 +105,9 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	force = 40
 	throwforce = 20
 
-/obj/item/claymore/sword/orcish
-	name = "orcish sword"
-	desc = "A sharp and deadly Orcish sword."
+/obj/item/claymore/sword/dwarven
+	name = "dwarven sword"
+	desc = "A lethal sword made from strong Dwarven metal."
 	icon_state = "claymore"
 	item_state = "claymore"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
@@ -164,9 +164,9 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	armour_penetration = 35
 	throwforce = 10
 
-/obj/item/claymore/mace/dwarven
-	name = "dwarven mace"
-	desc = "A sturdy and well forged Dwarven mace."
+/obj/item/claymore/mace/orcish
+	name = "orcish mace"
+	desc = "A lethal and threatening orcish mace."
 	icon_state = "claymore"
 	item_state = "claymore"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
@@ -176,9 +176,9 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	armour_penetration = 40
 	throwforce = 15
 
-/obj/item/claymore/mace/orcish
-	name = "orcish mace"
-	desc = "A lethal and threatening orcish mace."
+/obj/item/claymore/mace/dwarven
+	name = "dwarven mace"
+	desc = "A sturdy and well forged Dwarven mace."
 	icon_state = "claymore"
 	item_state = "claymore"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
@@ -357,9 +357,9 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	armour_penetration = 20
 	throwforce = 35
 
-/obj/item/hatchet/waraxe/dwarven
-	name = "dwarven waraxe"
-	desc = "A strong and sturdy waraxe made from Dwarven metal."
+/obj/item/hatchet/waraxe/orcish
+	name = "orcish waraxe"
+	desc = "An intimidating orcish waraxe, as scary as it is deadly."
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "hatchet"
 	item_state = "hatchet"
@@ -369,9 +369,9 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	armour_penetration = 25
 	throwforce = 40
 
-/obj/item/hatchet/waraxe/orcish
-	name = "orcish waraxe"
-	desc = "An intimidating orcish waraxe, as scary as it is deadly."
+/obj/item/hatchet/waraxe/dwarven
+	name = "dwarven waraxe"
+	desc = "A strong and sturdy waraxe made from Dwarven metal."
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "hatchet"
 	item_state = "hatchet"
