@@ -78,6 +78,10 @@
 #define TRAIT_UNSTABLE			"unstable"
 #define TRAIT_FORTIFY_MELEE		"fortify_melee"
 
+//TES13 joblock traits
+#define TRAIT_BLACKSMITH		"blacksmith"
+#define TRAIT_ALCHEMIST			"alchemist"
+
 //non-mob traits
 #define TRAIT_PARALYSIS			"paralysis" //Used for limb-based paralysis, where replacing the limb will fix it
 

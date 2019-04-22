@@ -185,7 +185,7 @@
 	name = "orcish dagger"
 	icon_state = "knife"
 	item_state = "knife"
-	desc = "An imposing Orcish dagger. It looks rather intimidating for a small weapon.
+	desc = "An imposing Orcish dagger. It looks rather intimidating for a small weapon."
 	force = 25
 	throwforce = 30
 
@@ -193,7 +193,7 @@
 	name = "dwarven dagger"
 	icon_state = "knife"
 	item_state = "knife"
-	desc = "A dagger forged from Dwarven metal, sturdy and deadly.""
+	desc = "A dagger forged from Dwarven metal, sturdy and deadly."
 	force = 30
 	throwforce = 35
 

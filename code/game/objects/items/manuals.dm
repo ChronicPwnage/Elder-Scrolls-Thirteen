@@ -231,6 +231,47 @@
 			Good luck!
 			</html>"}
 
+/obj/item/book/manual/alchemy
+	name = "Herbalist's Pocket Guide to Skyrim"
+	icon_state ="chemistrybook"
+	desc = "This handy pocket guide on alchemy has a list of every alchemical combination known to date. Of course, only a master alchemist can make use of it."
+	w_class = WEIGHT_CLASS_SMALL
+	author = "Agneta Falia"
+	title = "Herbalist's Pocket Guide to Skyrim"
+	dat = {"<html>
+			The book contains pages upon pages of detailed notes on every alchemical ingredient. Whoever called this a 'pocket' guide was clearly mistaken.<br>
+			Note: these concoctions are only effective on humanoids. The wildlife of Skyrim is hardy enough to withstand even the most advanced potions and poisons.<br>
+			The last few pages of the book contain a summary of ingredient combinations and their effects:<br><br><br>
+			Restore Health (Minor): 1 part wheat, 1 part blisterwort<br>
+			Restore Health (Plentiful): 2 parts Restore Health (Minor), 1 part skeever meat - creates 2 parts, not 3!<br>
+			Restore Health (Extreme):  2 parts Restore Health (Plentiful), 1 part sabercat meat - creates 2 parts, not 3!<br><br>
+
+			Cure Poison (Minor): 1 part wheat, 1 part mudcrab chitin<br>
+			Cure Poison (Plentiful): 2 parts Cure Poison (Minor), 1 part skeever meat - creates 2 parts, not 3!<br>
+			Cure Poison (Extreme):  2 parts Cure Poison (Plentiful), 1 part sabercat meat - creates 2 parts, not 3!<br><br>
+
+			Fortify Health: 1 part fly amanita, 1 part mountain flowers<br>
+			Fortify Stamina: 1 part bear meat, 1 part mountain flowers<br>
+			Fortify Magicka: 1 part hanging moss, 1 part mountain flowers<br><br>
+
+			Invisibility: 1 part nirnroot, 1 part chaurus eggs - lasts a very short time, but very effective!<br>
+			Fortify Melee: 1 part bear meat, 1 part hanging moss<br>
+			Stabilize Temperature: 1 part mudcrab chitin, 1 part mountain flowers<br>
+			Hawkeye: 1 part spider meat, 1 part powdered mammoth tusk<br><br>
+
+			<b>These poisons can bring great harm to yourself and others if used incorrectly. Take immense caution.</b><br>
+			Damage Health (Weak):  1 part nightshade, 1 part mountain flowers<br>
+			Damage Health (Potent):  2 parts Damage Health (Weak), 1 part deathbell - creates 2 parts, not 3!<br>
+			Damage Health (Deadly):  2 parts Damage Health (Potent), 1 part nirnroot - creates 2 parts, not 3!<br><br>
+
+			Damage Magicka (Weak):  1 part nightshade, 1 part hanging moss<br>
+			Damage Magicka (Potent):  2 parts Damage Magicka (Weak), 1 part spider meat - creates 2 parts, not 3!<br>
+			Damage Magicka (Deadly):  2 parts Damage Magicka (Potent), 1 part chaurus eggs - creates 2 parts, not 3!<br><br>
+
+			Damage Stamina:  1 part deathbell, 1 part blisterwort<br>
+			Alchemical Combustion:  1 part powdered mammoth tusk, 1 part chaurus eggs - lasts a very short time, but very effective!<br>
+			</html>"}
+
 // Wiki books that are linked to the configured wiki link.
 
 // A book that links to the wiki

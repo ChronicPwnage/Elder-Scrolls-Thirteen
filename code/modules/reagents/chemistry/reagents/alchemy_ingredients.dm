@@ -57,6 +57,12 @@
 	list_reagents = list(bearmeat = 5)
 	grind_results = list(bearmeat = 10)
 
+/obj/item/reagent_containers/food/snacks/alchemy/sabercatmeat
+	name = "sabercat meat"
+	icon_state = "sabercatmeat"
+	list_reagents = list(sabercatmeat = 5)
+	grind_results = list(sabercatmeat = 10)
+
 /obj/item/reagent_containers/food/snacks/alchemy/hangingmoss
 	name = "hanging moss"
 	icon_state = "hangingmoss"
@@ -74,6 +80,12 @@
 	icon_state = "chauruseggs"
 	list_reagents = list(chauruseggs = 5)
 	grind_results = list(chauruseggs = 10)
+
+/obj/item/reagent_containers/food/snacks/alchemy/nightshade
+	name = "nightshade"
+	icon_state = "nightshade"
+	list_reagents = list(nightshade = 5)
+	grind_results = list(nightshade = 10)
 
 /obj/item/reagent_containers/food/snacks/alchemy/deathbell
 	name = "deathbell"
