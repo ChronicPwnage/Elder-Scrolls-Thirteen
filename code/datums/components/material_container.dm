@@ -74,10 +74,10 @@
 		return
 	var/material_amount = get_item_material_amount(I)
 	if(!material_amount)
-		to_chat(user, "<span class='warning'>[I] does not contain sufficient amounts of metal or glass to be accepted by [parent].</span>")
+		to_chat(user, "<span class='warning'>[I] does not contain sufficient amounts of materials to be accepted by [parent].</span>")
 		return
 	if(!has_space(material_amount))
-		to_chat(user, "<span class='warning'>[parent] is full. Please remove metal or glass from [parent] in order to insert more.</span>")
+		to_chat(user, "<span class='warning'>[parent] is full. Please remove materials from [parent] in order to insert more.</span>")
 		return
 	user_insert(I, user)
 
@@ -394,3 +394,37 @@
 	name = "Plastic"
 	id = MAT_PLASTIC
 	sheet_type = /obj/item/stack/sheet/plastic
+
+//TES13
+
+/datum/material/leather
+	name = "Leather"
+	id = MAT_LEATHER
+
+/datum/material/corundum
+	name = "Corundum"
+	id = MAT_CORUNDUM
+
+/datum/material/elven
+	name = "Moonstone"
+	id = MAT_ELVEN
+
+/datum/material/orcish
+	name = "Orichalcum"
+	id = MAT_ORCISH
+
+/datum/material/dwarven
+	name = "Dwarven metal"
+	id = MAT_DWARVEN
+
+/datum/material/malachite
+	name = "Malachite"
+	id = MAT_MALACHITE
+
+/datum/material/ebony
+	name = "Ebony"
+	id = MAT_EBONY
+
+/datum/material/dragon
+	name = "Dragonscales"
+	id = MAT_DRAGON

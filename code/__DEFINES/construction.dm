@@ -72,6 +72,17 @@
 #define MAT_TITANIUM	"$titanium"
 #define MAT_BIOMASS		"$biomass"
 #define MAT_PLASTIC	"$plastic"
+
+//TES13 defines
+#define MAT_LEATHER		"$leather"
+#define MAT_CORUNDUM	"$corundum"
+#define MAT_ELVEN		"$moonstone"
+#define MAT_ORCISH		"$orichalcum"
+#define MAT_DWARVEN		"$dwarven metal"
+#define MAT_MALACHITE	"$malachite" //to avoid conflict with MAT_GLASS
+#define MAT_EBONY		"$ebony"
+#define MAT_DRAGON		"$dragonscales"
+
 //The amount of materials you get from a sheet of mineral like iron/diamond/glass etc
 #define MINERAL_MATERIAL_AMOUNT 2000
 //The maximum size of a stack object.
@@ -91,14 +102,6 @@
 #define CAT_SMITH   "Smithing"
 #define CAT_LEATHER "Leather"
 #define CAT_IRON    "Iron"
-#define CAT_STEEL   "Steel"
-#define CAT_ELVEN   "Elven"
-#define CAT_DWARVEN "Dwarven"
-#define CAT_ORCISH  "Orcish"
-#define CAT_GLASS   "Glass"
-#define CAT_EBONY   "Ebony"
-#define CAT_DRAGON  "Dragon"
-#define CAT_FORGE   "Forge"
 #define CAT_CLOTHING	"Clothing"
 #define CAT_FOOD	"Foods"
 #define CAT_BREAD	"Breads"

@@ -263,7 +263,7 @@
 	lefthand_file = 'icons/mob/inhands/weapons/axes_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/axes_righthand.dmi'
 	name = "orcish greatsword"
-	desc = "A threatening and incredibly deadly Orcish greatsword."
+	desc = "A threatening and incredibly deadly Orcish greatsword.""
 	force = 10
 	throwforce = 15
 	force_unwielded = 10
@@ -274,7 +274,7 @@
 	lefthand_file = 'icons/mob/inhands/weapons/axes_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/axes_righthand.dmi'
 	name = "dwarven greatsword"
-	desc = "A bulky and strong greatsword fashioned from Dwarven metal."
+	desc = "A bulky and strong greatsword fashioned from Dwarven metal.
 	force = 15
 	throwforce = 15
 	force_unwielded = 15
@@ -665,7 +665,7 @@
 		parts_list -= G
 		qdel(src)
 	..()
-	
+
 
 /obj/item/twohanded/spear/explosive
 	name = "explosive lance"
@@ -693,7 +693,7 @@
 	..()
 	to_chat(user, "<span class='notice'>Alt-click to set your war cry.</span>")
 
-/obj/item/twohanded/spear/explosive/update_icon()	
+/obj/item/twohanded/spear/explosive/update_icon()
 	icon_state = "spearbomb[wielded]"
 
 /obj/item/twohanded/spear/explosive/AltClick(mob/user)
