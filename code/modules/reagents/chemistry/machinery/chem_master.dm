@@ -2,15 +2,15 @@
 #define RANDOM_PILL_STYLE 22 //Dont change this one though
 
 /obj/machinery/chem_master
-	name = "ChemMaster 3000"
-	desc = "Used to separate chemicals and distribute them in a variety of forms."
+	name = "alchemy table"
+	desc = "Used to separate alchemical mixtures and distribute them in a variety of forms."
 	density = TRUE
 	layer = BELOW_OBJ_LAYER
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "mixer0"
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 20
-	resistance_flags = FIRE_PROOF | ACID_PROOF
+	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	circuit = /obj/item/circuitboard/machine/chem_master
 	var/obj/item/reagent_containers/beaker = null
 	var/obj/item/storage/pill_bottle/bottle = null
@@ -80,12 +80,6 @@
 		qdel(src)
 
 /obj/machinery/chem_master/attackby(obj/item/I, mob/user, params)
-	if(default_deconstruction_screwdriver(user, "mixer0_nopower", "mixer0", I))
-		return
-
-	else if(default_deconstruction_crowbar(I))
-		return
-
 	if(default_unfasten_wrench(user, I))
 		return
 	if(istype(I, /obj/item/reagent_containers) && !(I.item_flags & ABSTRACT) && I.is_open_container())
@@ -142,6 +136,11 @@
 /obj/machinery/chem_master/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
 										datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
 	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
+	if(isliving(user))
+		var/mob/living/L = user
+		if(!L.has_trait(TRAIT_ALCHEMIST))
+			to_chat(user, "<span class='warning'>You're not really sure how you'd go about using this. Alchemy is harder than it looks.</span>")
+			return
 	if(!ui)
 		var/datum/asset/assets = get_asset_datum(/datum/asset/spritesheet/simple/pills)
 		assets.send(user)
@@ -153,7 +152,7 @@
 /obj/machinery/chem_master/ui_base_html(html)
 	var/datum/asset/spritesheet/simple/assets = get_asset_datum(/datum/asset/spritesheet/simple/pills)
 	. = replacetext(html, "<!--customheadhtml-->", assets.css_tag())
-	
+
 /obj/machinery/chem_master/ui_data(mob/user)
 	var/list/data = list()
 	data["isBeakerLoaded"] = beaker ? 1 : 0

@@ -263,7 +263,7 @@
 	lefthand_file = 'icons/mob/inhands/weapons/axes_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/axes_righthand.dmi'
 	name = "orcish greatsword"
-	desc = "A threatening and incredibly deadly Orcish greatsword.""
+	desc = "A threatening and incredibly deadly Orcish greatsword."
 	force = 10
 	throwforce = 15
 	force_unwielded = 10
@@ -274,7 +274,7 @@
 	lefthand_file = 'icons/mob/inhands/weapons/axes_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/axes_righthand.dmi'
 	name = "dwarven greatsword"
-	desc = "A bulky and strong greatsword fashioned from Dwarven metal.
+	desc = "A bulky and strong greatsword fashioned from Dwarven metal."
 	force = 15
 	throwforce = 15
 	force_unwielded = 15

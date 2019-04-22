@@ -61,6 +61,50 @@
 		reading = FALSE
 	return TRUE
 
+///TRAIT GRANTERS///
+/obj/item/book/granter/trait
+	var/granted_trait
+	var/traitname = "catching bugs"
+
+/obj/item/book/granter/trait/already_known(mob/living/user)
+	if(!granted_trait)
+		return TRUE
+	if(user.has_trait(granted_trait))
+		to_chat(user, "<span class='notice'>You already know all about [traitname].</span>")
+		return TRUE
+	return FALSE
+
+/obj/item/book/granter/trait/on_reading_start(mob/living/user)
+	to_chat(user, "<span class='notice'>You start reading about [traitname]...</span>")
+
+/obj/item/book/granter/trait/on_reading_finished(mob/living/user)
+	to_chat(user, "<span class='notice'>You feel like you've got a good handle on [traitname]!</span>")
+	user.add_trait(granted_trait, TRAIT_GENERIC)
+	onlearned(user)
+
+/obj/item/book/granter/trait/onlearned(mob/living/user)
+	..()
+	if(oneuse)
+		user.visible_message("<span class='caution'>[src]'s pages crumble away. This book is of no use to anyone now.</span>")
+		qdel(src)
+
+/obj/item/book/granter/trait/alchemist
+	name = "Herbalist's Guide to Skyrim - First Edition"
+	desc = "A guide on alchemical reagents and ingredients, and how to mix them to great effect. A must-have for all budding alchemists."
+	oneuse = TRUE
+	granted_trait = TRAIT_ALCHEMIST
+	traitname = "alchemy"
+	remarks = list("Always have a safe working environment...", "A little wheat and blisterwort makes a healing potion...", "Ingredients can be tasted, but most are poisonous...", "A mortar and pestle can grind up ingredients...", "The alchemical arts are known to few...", "Some potions can be combined with ingredients to amplify them...")
+
+/obj/item/book/granter/trait/blacksmith
+	name = "The Armorer's Challenge"
+	desc = "A book about the Empire's victory over the Argonians at Black Marsh, containing a surprising amount of information about blacksmithing."
+	oneuse = TRUE
+	granted_trait = TRAIT_BLACKSMITH
+	traitname = "blacksmithing"
+	remarks = list("Stoke the forge and quench the blade...", "Forges can create more than simply weapons and armor...", "Items can be smelted down into their components...", "Most recipes require leather...", "Corundum and iron can combine to create steel...", "Forging an item is more difficult than it looks...")
+
+
 ///ACTION BUTTONS///
 
 /obj/item/book/granter/action

@@ -613,6 +613,8 @@
 		"mountainflowers",
 		"hangingmoss",
 		"deathbell",
+		"nightshade",
+		"sabercatmeat",
 		"bearmeat",
 		"nirnroot",
 		"mammothtusk",

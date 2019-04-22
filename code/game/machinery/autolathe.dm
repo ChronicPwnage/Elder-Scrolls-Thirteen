@@ -62,6 +62,11 @@
 
 /obj/machinery/autolathe/ui_interact(mob/user)
 	. = ..()
+	if(isliving(user))
+		var/mob/living/L = user
+		if(!L.has_trait(TRAIT_BLACKSMITH))
+			to_chat(user, "<span class='warning'>You're not really sure how you'd go about using this. Blacksmithing is harder than it looks.</span>")
+			return
 	if(!is_operational())
 		return
 

@@ -11,10 +11,10 @@
  * Pens
  */
 /obj/item/pen
-	desc = "It's a normal black ink pen."
-	name = "pen"
+	desc = "It's a stylish quill pen."
+	name = "quill pen"
 	icon = 'icons/obj/bureaucracy.dmi'
-	icon_state = "pen"
+	icon_state = "quill"
 	item_state = "pen"
 	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_EARS
 	throwforce = 0
