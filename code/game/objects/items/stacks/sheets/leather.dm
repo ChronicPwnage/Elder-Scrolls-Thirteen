@@ -149,6 +149,7 @@ GLOBAL_LIST_INIT(xeno_recipes, list ( \
 	singular_name = "leather piece"
 	icon_state = "sheet-leather"
 	item_state = "sheet-leather"
+	materials = list(MAT_LEATHER=MINERAL_MATERIAL_AMOUNT)
 
 GLOBAL_LIST_INIT(leather_recipes, list ( \
 	new/datum/stack_recipe("wallet", /obj/item/storage/wallet, 1), \
@@ -215,19 +216,20 @@ GLOBAL_LIST_INIT(sinew_recipes, list ( \
 	layer = MOB_LAYER
 
 
-//Step one - dehairing.
+//Kill animal, prepare hide using knife to convert to leather.
 
 /obj/item/stack/sheet/animalhide/attackby(obj/item/W, mob/user, params)
 	if(W.is_sharp())
 		playsound(loc, 'sound/weapons/slice.ogg', 50, 1, -1)
-		user.visible_message("[user] starts cutting hair off \the [src].", "<span class='notice'>You start cutting the hair off \the [src]...</span>", "<span class='italics'>You hear the sound of a knife rubbing against flesh.</span>")
+		user.visible_message("[user] starts preparing \the [src].", "<span class='notice'>You start preparing \the [src]...</span>", "<span class='italics'>You hear the sound of a knife rubbing against flesh.</span>")
 		if(do_after(user, 50, target = src))
-			to_chat(user, "<span class='notice'>You cut the hair from this [src.singular_name].</span>")
-			new /obj/item/stack/sheet/hairlesshide(user.drop_location(), 1)
+			to_chat(user, "<span class='notice'>You prepare this [src.singular_name].</span>")
+			new /obj/item/stack/sheet/leather(user.drop_location(), 1)
 			use(1)
 	else
 		return ..()
 
+//ignore all this vvvvvv
 
 //Step two - washing..... it's actually in washing machine code.
 
