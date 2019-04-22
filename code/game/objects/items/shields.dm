@@ -22,13 +22,19 @@
 
 /obj/item/shield/on_shield_block(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", damage = 0, attack_type = MELEE_ATTACK)
 	if (obj_integrity <= damage)
-		var/turf/T = get_turf(owner)
-		T.visible_message("<span class='warning'>[hitby] destroys [src]!</span>")
-		shield_break(owner)
-		qdel(src)
+		shield_break(owner, hitby)
 		return FALSE
 	take_damage(damage)
 	return ..()
+
+/obj/item/shield/proc/shield_break(mob/living/carbon/human/owner, atom/movable/hitby)
+	//playsound(get_turf(src), 'sound/effects/glassbr3.ogg', 100) //TODO: Replace, make it play for everyone
+	var/turf/T = get_turf(owner)
+	T.visible_message("<span class='warning'>[hitby] destroys [src]!</span>")
+	qdel(src)
+	new broken_shield((get_turf(src)))
+
+/obj/item/shield/proc/shield_fix()
 
 /obj/item/shield/broken
 	name = "broken shield"
@@ -67,12 +73,6 @@
 	*/
 	else
 		return ..()
-
-
-
-/obj/item/shield/proc/shield_break(mob/living/carbon/human/owner)
-	//playsound(owner, 'sound/effects/glassbr3.ogg', 100) //TODO: Replace, make it play for everyone
-	new broken_shield((get_turf(src)))
 
 /obj/item/shield/examine(mob/user)
 	..()
@@ -137,10 +137,10 @@
 	main_material = "iron"
 	max_integrity = 300
 
-/obj/item/shield/kite/iron/broken
-	name = "broken iron kiteshield"
-	desc = "A mid-sized shield that balances mobility and protection. This one is made out of iron, and is broken beyond any use as a shield and must be repaired."
-	icon_state = "kiteshield_iron"
+/obj/item/shield/square/iron/broken
+	name = "broken iron square shield"
+	desc = "A large-sized shield that sacrifices mobility for protection. This one is made out of iron, and is broken beyond any use as a shield and must be repaired."
+	icon_state = "squareshield_iron"
 	block_chance = 0
 	force = 10
 	materials_deconstruct = list(MAT_IRON=1, MAT_LEATHER=1)
