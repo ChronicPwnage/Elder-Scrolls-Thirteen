@@ -3,15 +3,16 @@
 #define AUTOLATHE_SEARCH_MENU     3
 
 /obj/machinery/autolathe
-	name = "autolathe"
-	desc = "It produces items using metal and glass."
-	icon_state = "autolathe"
+	name = "forge"
+	desc = "A blacksmith's forge capable of creating items out of metal. There's a container for storing ingots."
+	icon_state = "forge"
 	density = TRUE
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 10
 	active_power_usage = 100
 	circuit = /obj/item/circuitboard/machine/autolathe
 	layer = BELOW_OBJ_LAYER
+	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 
 	var/operating = FALSE
 	var/list/L = list()
@@ -35,20 +36,20 @@
 	var/hacked_price = 50
 
 	var/list/categories = list(
-							"Tools",
-							"Electronics",
-							"Construction",
-							"T-Comm",
-							"Security",
-							"Machinery",
-							"Medical",
+							"Iron",
+							"Steel",
+							"Elven",
+							"Orcish",
+							"Dwarven",
+							"Malachite",
+							"Ebony",
+							"Dragon",
 							"Misc",
-							"Dinnerware",
-							"Imported"
+							"Materials"
 							)
 
 /obj/machinery/autolathe/Initialize()
-	AddComponent(/datum/component/material_container, list(MAT_METAL, MAT_GLASS), 0, TRUE, null, null, CALLBACK(src, .proc/AfterMaterialInsert))
+	AddComponent(/datum/component/material_container, list(MAT_METAL, MAT_GLASS, MAT_LEATHER, MAT_CORUNDUM, MAT_ELVEN, MAT_ORCISH, MAT_DWARVEN, MAT_MALACHITE, MAT_EBONY, MAT_DRAGON), 0, TRUE, null, null, CALLBACK(src, .proc/AfterMaterialInsert))
 	. = ..()
 
 	wires = new /datum/wires/autolathe(src)
@@ -61,6 +62,11 @@
 
 /obj/machinery/autolathe/ui_interact(mob/user)
 	. = ..()
+	if(isliving(user))
+		var/mob/living/L = user
+		if(!L.has_trait(TRAIT_BLACKSMITH))
+			to_chat(user, "<span class='warning'>You're not really sure how you'd go about using this. Blacksmithing is harder than it looks.</span>")
+			return
 	if(!is_operational())
 		return
 
@@ -87,11 +93,7 @@
 
 /obj/machinery/autolathe/attackby(obj/item/O, mob/user, params)
 	if (busy)
-		to_chat(user, "<span class=\"alert\">The autolathe is busy. Please wait for completion of previous operation.</span>")
-		return TRUE
-
-	if(default_deconstruction_screwdriver(user, "autolathe_t", "autolathe", O))
-		updateUsrDialog()
+		to_chat(user, "<span class=\"alert\">The forge is busy. Please wait for completion of previous operation.</span>")
 		return TRUE
 
 	if(default_deconstruction_crowbar(O))
@@ -126,11 +128,6 @@
 	if(ispath(type_inserted, /obj/item/stack/ore/bluespace_crystal))
 		use_power(MINERAL_MATERIAL_AMOUNT / 10)
 	else
-		switch(id_inserted)
-			if (MAT_METAL)
-				flick("autolathe_o",src)//plays metal insertion animation
-			if (MAT_GLASS)
-				flick("autolathe_r",src)//plays glass insertion animation
 		use_power(min(1000, amount_inserted / 100))
 	updateUsrDialog()
 
@@ -163,16 +160,36 @@
 			var/coeff = (is_stack ? 1 : prod_coeff) //stacks are unaffected by production coefficient
 			var/metal_cost = being_built.materials[MAT_METAL]
 			var/glass_cost = being_built.materials[MAT_GLASS]
+			var/leather_cost = being_built.materials[MAT_LEATHER]
+			var/corundum_cost = being_built.materials[MAT_CORUNDUM]
+			var/elven_cost = being_built.materials[MAT_ELVEN]
+			var/orcish_cost = being_built.materials[MAT_ORCISH]
+			var/dwarven_cost = being_built.materials[MAT_DWARVEN]
+			var/malachite_cost = being_built.materials[MAT_MALACHITE]
+			var/ebony_cost = being_built.materials[MAT_EBONY]
+			var/dragon_cost = being_built.materials[MAT_DRAGON]
 
 			var/power = max(2000, (metal_cost+glass_cost)*multiplier/5)
 
 			GET_COMPONENT(materials, /datum/component/material_container)
-			if((materials.amount(MAT_METAL) >= metal_cost*multiplier*coeff) && (materials.amount(MAT_GLASS) >= glass_cost*multiplier*coeff))
+			if(
+				(materials.amount(MAT_METAL) >= metal_cost*multiplier*coeff
+				) && (materials.amount(MAT_GLASS) >= glass_cost*multiplier*coeff
+				) &&  (materials.amount(MAT_LEATHER) >= leather_cost*multiplier*coeff
+				) &&  (materials.amount(MAT_CORUNDUM) >= corundum_cost*multiplier*coeff
+				) &&  (materials.amount(MAT_ELVEN) >= elven_cost*multiplier*coeff
+				) &&  (materials.amount(MAT_ORCISH) >= orcish_cost*multiplier*coeff
+				) &&  (materials.amount(MAT_DWARVEN) >= dwarven_cost*multiplier*coeff
+				) &&  (materials.amount(MAT_MALACHITE) >= malachite_cost*multiplier*coeff
+				) &&  (materials.amount(MAT_EBONY) >= ebony_cost*multiplier*coeff
+				) &&  (materials.amount(MAT_DRAGON) >= dragon_cost*multiplier*coeff
+				))
 				busy = TRUE
 				use_power(power)
-				icon_state = "autolathe_n"
+				icon_state = "forge_n"
 				var/time = is_stack ? 32 : (32 * coeff * multiplier) ** 0.8
-				addtimer(CALLBACK(src, .proc/make_item, power, metal_cost, glass_cost, multiplier, coeff, is_stack), time)
+				addtimer(CALLBACK(src, .proc/make_item, power, metal_cost, glass_cost, leather_cost, corundum_cost, elven_cost, orcish_cost,
+														 dwarven_cost, malachite_cost, ebony_cost, dragon_cost, multiplier, coeff, is_stack), time)
 
 		if(href_list["search"])
 			matching_designs.Cut()
@@ -183,17 +200,27 @@
 					matching_designs.Add(D)
 			updateUsrDialog()
 	else
-		to_chat(usr, "<span class=\"alert\">The autolathe is busy. Please wait for completion of previous operation.</span>")
+		to_chat(usr, "<span class=\"alert\">The forge is busy. Please wait for completion of previous operation.</span>")
 
 	updateUsrDialog()
 
 	return
 
-/obj/machinery/autolathe/proc/make_item(power, metal_cost, glass_cost, multiplier, coeff, is_stack)
+/obj/machinery/autolathe/proc/make_item(power, metal_cost, glass_cost, leather_cost, corundum_cost, elven_cost, orcish_cost,
+														 dwarven_cost, malachite_cost, ebony_cost, dragon_cost, multiplier, coeff, is_stack)
 	GET_COMPONENT(materials, /datum/component/material_container)
 	var/atom/A = drop_location()
 	use_power(power)
-	var/list/materials_used = list(MAT_METAL=metal_cost*coeff*multiplier, MAT_GLASS=glass_cost*coeff*multiplier)
+	var/list/materials_used = list(MAT_METAL=metal_cost*coeff*multiplier,
+									MAT_GLASS=glass_cost*coeff*multiplier,
+									MAT_LEATHER=leather_cost*coeff*multiplier,
+									MAT_CORUNDUM=corundum_cost*coeff*multiplier,
+									MAT_ELVEN=elven_cost*coeff*multiplier,
+									MAT_ORCISH=orcish_cost*coeff*multiplier,
+									MAT_DWARVEN=dwarven_cost*coeff*multiplier,
+									MAT_MALACHITE=malachite_cost*coeff*multiplier,
+									MAT_EBONY=ebony_cost*coeff*multiplier,
+									MAT_DRAGON=dragon_cost*coeff*multiplier)
 	materials.use_amount(materials_used)
 
 	if(is_stack)
@@ -207,14 +234,14 @@
 			for(var/mat in materials_used)
 				new_item.materials[mat] = materials_used[mat] / multiplier
 			new_item.autolathe_crafted(src)
-	icon_state = "autolathe"
+	icon_state = "forge"
 	busy = FALSE
 	updateDialog()
 
 /obj/machinery/autolathe/RefreshParts()
 	var/T = 0
 	for(var/obj/item/stock_parts/matter_bin/MB in component_parts)
-		T += MB.rating*75000
+		T += MB.rating*750000
 	GET_COMPONENT(materials, /datum/component/material_container)
 	materials.max_amount = T
 	T=1.2
@@ -222,14 +249,8 @@
 		T -= M.rating*0.2
 	prod_coeff = min(1,max(0,T)) // Coeff going 1 -> 0,8 -> 0,6 -> 0,4
 
-/obj/machinery/autolathe/examine(mob/user)
-	..()
-	GET_COMPONENT(materials, /datum/component/material_container)
-	if(in_range(user, src) || isobserver(user))
-		to_chat(user, "<span class='notice'>The status display reads: Storing up to <b>[materials.max_amount]</b> material units.<br>Material consumption at <b>[prod_coeff*100]%</b>.<span>")
-
 /obj/machinery/autolathe/proc/main_win(mob/user)
-	var/dat = "<div class='statusDisplay'><h3>Autolathe Menu:</h3><br>"
+	var/dat = "<div class='statusDisplay'><h3>Forge Recipes:</h3><br>"
 	dat += materials_printout()
 
 	dat += "<form name='search' action='?src=[REF(src)]'>\
@@ -271,7 +292,17 @@
 
 		if(ispath(D.build_path, /obj/item/stack))
 			GET_COMPONENT(materials, /datum/component/material_container)
-			var/max_multiplier = min(D.maxstack, D.materials[MAT_METAL] ?round(materials.amount(MAT_METAL)/D.materials[MAT_METAL]):INFINITY,D.materials[MAT_GLASS]?round(materials.amount(MAT_GLASS)/D.materials[MAT_GLASS]):INFINITY)
+			var/max_multiplier = min(D.maxstack, D.materials[MAT_METAL] ?round(materials.amount(MAT_METAL)/D.materials[MAT_METAL]):INFINITY,
+			D.materials[MAT_GLASS]?round(materials.amount(MAT_GLASS)/D.materials[MAT_GLASS]):INFINITY,
+			D.materials[MAT_LEATHER]?round(materials.amount(MAT_LEATHER)/D.materials[MAT_LEATHER]):INFINITY,
+			D.materials[MAT_CORUNDUM]?round(materials.amount(MAT_CORUNDUM)/D.materials[MAT_CORUNDUM]):INFINITY,
+			D.materials[MAT_ELVEN]?round(materials.amount(MAT_ELVEN)/D.materials[MAT_ELVEN]):INFINITY,
+			D.materials[MAT_ORCISH]?round(materials.amount(MAT_ORCISH)/D.materials[MAT_ORCISH]):INFINITY,
+			D.materials[MAT_DWARVEN]?round(materials.amount(MAT_DWARVEN)/D.materials[MAT_DWARVEN]):INFINITY,
+			D.materials[MAT_MALACHITE]?round(materials.amount(MAT_MALACHITE)/D.materials[MAT_MALACHITE]):INFINITY,
+			D.materials[MAT_EBONY]?round(materials.amount(MAT_EBONY)/D.materials[MAT_EBONY]):INFINITY,
+			D.materials[MAT_DRAGON]?round(materials.amount(MAT_DRAGON)/D.materials[MAT_DRAGON]):INFINITY
+			)
 			if (max_multiplier>10 && !disabled)
 				dat += " <a href='?src=[REF(src)];make=[D.id];multiplier=10'>x10</a>"
 			if (max_multiplier>25 && !disabled)
@@ -303,7 +334,17 @@
 
 		if(ispath(D.build_path, /obj/item/stack))
 			GET_COMPONENT(materials, /datum/component/material_container)
-			var/max_multiplier = min(D.maxstack, D.materials[MAT_METAL] ?round(materials.amount(MAT_METAL)/D.materials[MAT_METAL]):INFINITY,D.materials[MAT_GLASS]?round(materials.amount(MAT_GLASS)/D.materials[MAT_GLASS]):INFINITY)
+			var/max_multiplier = min(D.maxstack, D.materials[MAT_METAL] ?round(materials.amount(MAT_METAL)/D.materials[MAT_METAL]):INFINITY,
+			D.materials[MAT_GLASS]?round(materials.amount(MAT_GLASS)/D.materials[MAT_GLASS]):INFINITY,
+			D.materials[MAT_LEATHER]?round(materials.amount(MAT_LEATHER)/D.materials[MAT_LEATHER]):INFINITY,
+			D.materials[MAT_CORUNDUM]?round(materials.amount(MAT_CORUNDUM)/D.materials[MAT_CORUNDUM]):INFINITY,
+			D.materials[MAT_ELVEN]?round(materials.amount(MAT_ELVEN)/D.materials[MAT_ELVEN]):INFINITY,
+			D.materials[MAT_ORCISH]?round(materials.amount(MAT_ORCISH)/D.materials[MAT_ORCISH]):INFINITY,
+			D.materials[MAT_DWARVEN]?round(materials.amount(MAT_DWARVEN)/D.materials[MAT_DWARVEN]):INFINITY,
+			D.materials[MAT_MALACHITE]?round(materials.amount(MAT_MALACHITE)/D.materials[MAT_MALACHITE]):INFINITY,
+			D.materials[MAT_EBONY]?round(materials.amount(MAT_EBONY)/D.materials[MAT_EBONY]):INFINITY,
+			D.materials[MAT_DRAGON]?round(materials.amount(MAT_DRAGON)/D.materials[MAT_DRAGON]):INFINITY
+			)
 			if (max_multiplier>10 && !disabled)
 				dat += " <a href='?src=[REF(src)];make=[D.id];multiplier=10'>x10</a>"
 			if (max_multiplier>25 && !disabled)
@@ -318,10 +359,11 @@
 
 /obj/machinery/autolathe/proc/materials_printout()
 	GET_COMPONENT(materials, /datum/component/material_container)
-	var/dat = "<b>Total amount:</b> [materials.total_amount] / [materials.max_amount] cm<sup>3</sup><br>"
+	var/dat = "<b>Total amount:</b> [materials.total_amount] cm<sup>3</sup><br>"
 	for(var/mat_id in materials.materials)
 		var/datum/material/M = materials.materials[mat_id]
-		dat += "<b>[M.name] amount:</b> [M.amount] cm<sup>3</sup><br>"
+		if(M.amount > 0)
+			dat += "<b>[M.name] amount:</b> [M.amount] cm<sup>3</sup><br>"
 	return dat
 
 /obj/machinery/autolathe/proc/can_build(datum/design/D, amount = 1)
@@ -335,6 +377,22 @@
 		return FALSE
 	if(D.materials[MAT_GLASS] && (materials.amount(MAT_GLASS) < (D.materials[MAT_GLASS] * coeff * amount)))
 		return FALSE
+	if(D.materials[MAT_LEATHER] && (materials.amount(MAT_LEATHER) < (D.materials[MAT_LEATHER] * coeff * amount)))
+		return FALSE
+	if(D.materials[MAT_CORUNDUM] && (materials.amount(MAT_CORUNDUM) < (D.materials[MAT_CORUNDUM] * coeff * amount)))
+		return FALSE
+	if(D.materials[MAT_ELVEN] && (materials.amount(MAT_ELVEN) < (D.materials[MAT_ELVEN] * coeff * amount)))
+		return FALSE
+	if(D.materials[MAT_ORCISH] && (materials.amount(MAT_ORCISH) < (D.materials[MAT_ORCISH] * coeff * amount)))
+		return FALSE
+	if(D.materials[MAT_DWARVEN] && (materials.amount(MAT_DWARVEN) < (D.materials[MAT_DWARVEN] * coeff * amount)))
+		return FALSE
+	if(D.materials[MAT_MALACHITE] && (materials.amount(MAT_MALACHITE) < (D.materials[MAT_MALACHITE] * coeff * amount)))
+		return FALSE
+	if(D.materials[MAT_EBONY] && (materials.amount(MAT_EBONY) < (D.materials[MAT_EBONY] * coeff * amount)))
+		return FALSE
+	if(D.materials[MAT_DRAGON] && (materials.amount(MAT_DRAGON) < (D.materials[MAT_DRAGON] * coeff * amount)))
+		return FALSE
 	return TRUE
 
 /obj/machinery/autolathe/proc/get_design_cost(datum/design/D)
@@ -343,7 +401,23 @@
 	if(D.materials[MAT_METAL])
 		dat += "[D.materials[MAT_METAL] * coeff] metal "
 	if(D.materials[MAT_GLASS])
-		dat += "[D.materials[MAT_GLASS] * coeff] glass"
+		dat += "[D.materials[MAT_GLASS] * coeff] glass "
+	if(D.materials[MAT_LEATHER])
+		dat += "[D.materials[MAT_LEATHER] * coeff] leather "
+	if(D.materials[MAT_CORUNDUM])
+		dat += "[D.materials[MAT_CORUNDUM] * coeff] corundum "
+	if(D.materials[MAT_ELVEN])
+		dat += "[D.materials[MAT_ELVEN] * coeff] moonstone "
+	if(D.materials[MAT_ORCISH])
+		dat += "[D.materials[MAT_ORCISH] * coeff] orichalcum "
+	if(D.materials[MAT_DWARVEN])
+		dat += "[D.materials[MAT_DWARVEN] * coeff] dwarven metal "
+	if(D.materials[MAT_MALACHITE])
+		dat += "[D.materials[MAT_MALACHITE] * coeff] malachite "
+	if(D.materials[MAT_EBONY])
+		dat += "[D.materials[MAT_EBONY] * coeff] ebony "
+	if(D.materials[MAT_DRAGON])
+		dat += "[D.materials[MAT_DRAGON] * coeff] dragonscales "
 	return dat
 
 /obj/machinery/autolathe/proc/reset(wire)

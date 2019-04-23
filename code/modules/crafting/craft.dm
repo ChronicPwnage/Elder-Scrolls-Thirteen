@@ -34,14 +34,7 @@
 						 CAT_CLOTHING, //Clothing subcategories
 						list(	//Smithing subcategories
 							CAT_LEATHER,
-							CAT_IRON,
-							CAT_STEEL,
-							CAT_ELVEN,
-							CAT_DWARVEN,
-							CAT_ORCISH,
-							CAT_GLASS,
-							CAT_EBONY,
-							CAT_DRAGON)
+							CAT_IRON)
 						)
 
 	var/datum/action/innate/crafting/button
@@ -131,6 +124,16 @@
 			.["other"][I.type] += 1
 		else
 			.["other"][I.type] += 1
+
+	for(var/obj/structure/I in get_environment(user))
+		if(I.flags_1 & HOLOGRAM_1)
+			continue
+		else if(I.machine_tool_behaviour)
+			.["tool_behaviour"] += I.machine_tool_behaviour
+			.["other"][I.type] += 1
+		else
+			.["other"][I.type] += 1
+
 
 /datum/personal_crafting/proc/check_tools(mob/user, datum/crafting_recipe/R, list/contents)
 	if(!R.tools.len)

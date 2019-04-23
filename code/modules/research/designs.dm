@@ -7,7 +7,7 @@ For the materials datum, it assumes you need reagents unless specified otherwise
 you use one of the material IDs below. These are NOT ids in the usual sense (they aren't defined in the object or part of a datum),
 they are simply references used as part of a "has materials?" type proc. They all start with a $ to denote that they aren't reagents.
 The currently supporting non-reagent materials. All material amounts are set as the define MINERAL_MATERIAL_AMOUNT, which defaults to 2000
-- MAT_METAL (/obj/item/stack/metal).
+- MAT_METAL (/obj/item/stack/metal and /obj/item/stack/sheet/mineral/TES/iron).
 - MAT_GLASS (/obj/item/stack/glass).
 - MAT_PLASMA (/obj/item/stack/plasma).
 - MAT_SILVER (/obj/item/stack/silver).
@@ -15,6 +15,17 @@ The currently supporting non-reagent materials. All material amounts are set as 
 - MAT_URANIUM (/obj/item/stack/uranium).
 - MAT_DIAMOND (/obj/item/stack/diamond).
 - MAT_BANANIUM (/obj/item/stack/bananium).
+
+and the TES ones:
+- MAT_LEATHER (/obj/item/stack/sheet/mineral/TES/leather)
+- MAT_CORUNDUM (/obj/item/stack/sheet/mineral/TES/steel - well, kinda)
+- MAT_ELVEN (/obj/item/stack/sheet/mineral/TES/elven)
+- MAT_DWARVEN (/obj/item/stack/sheet/mineral/TES/dwarven)
+- MAT_ORCISH (/obj/item/stack/sheet/mineral/TES/orcish)
+- MAT_MALACHITE (/obj/item/stack/sheet/mineral/TES/glass)
+- MAT_EBONY (/obj/item/stack/sheet/mineral/TES/ebony)
+- MAT_DRAGON (/obj/item/stack/sheet/mineral/TES/dragon)
+
 (Insert new ones here)
 
 Don't add new keyword/IDs if they are made from an existing one (such as rods which are made from metal). Only add raw materials.

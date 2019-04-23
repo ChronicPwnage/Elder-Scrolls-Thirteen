@@ -8,6 +8,7 @@
 	var/climbable = FALSE
 	var/mob/living/structureclimber
 	var/broken = 0 //similar to machinery's stat BROKEN
+	var/machine_tool_behaviour = NONE //can it be used as a tool in crafting?
 
 /obj/structure/Initialize()
 	if (!armor)

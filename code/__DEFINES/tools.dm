@@ -8,7 +8,7 @@
 #define TOOL_ANALYZER		"analyzer"
 #define TOOL_MINING			"mining"
 #define TOOL_SHOVEL			"shovel"
-#define TOOL_FORGE			"forge"
+#define TOOL_TANNINGRACK	"tanning rack"
 #define TOOL_ANVIL			"anvil"
 
 

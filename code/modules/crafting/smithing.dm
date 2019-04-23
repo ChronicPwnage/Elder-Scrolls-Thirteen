@@ -1,30 +1,33 @@
-/obj/machinery/forge
-	name = "metalworking forge"
-	desc = "A large furnace used for melting down ore into ingots."
-	icon = 'icons/obj/cult.dmi'
-	icon_state = "forge"
+/obj/structure/tanningrack
+	name = "tanning rack"
+	desc = "A wooden tanning rack used for crafting items out of leather."
+	icon = 'icons/obj/cult.dmi' //needs sprites
+	icon_state = "forge" //needs sprites
 	resistance_flags = INDESTRUCTIBLE
 	density = TRUE
 	layer = BELOW_OBJ_LAYER
 	anchored = TRUE
-	machine_tool_behaviour = list(TOOL_FORGE)
+	machine_tool_behaviour = list(TOOL_TANNINGRACK)
 
-/obj/machinery/forge/wrench_act(mob/living/user, obj/item/I)
-	default_unfasten_wrench(user, I, 10)
-	return TRUE
+/obj/structure/tanningrack/wrench_act(mob/living/user, obj/item/I)
+	to_chat(user, "<span class='notice'>You start taking apart \the [src]...</span>")
+	if(do_after(user, 50, target=src))
+		new /obj/item/stack/sheet/mineral/wood(loc, 10)
+		qdel(src)
+		return
 
-/obj/machinery/anvil
+/obj/structure/anvil
 	name = "metalworking anvil"
-	desc = "An anvil used for making weapons and armor. You can imagine yourself making iron daggers here for a long time."
-	icon = 'icons/obj/cult.dmi'
-	icon_state = "forge"
+	desc = "An anvil used for making low-quality weapons and armor. You can imagine yourself making iron daggers here for a long time."
+	icon = 'icons/obj/cult.dmi' //needs sprites
+	icon_state = "forge" //needs sprites
 	resistance_flags = INDESTRUCTIBLE
 	density = TRUE
 	layer = BELOW_OBJ_LAYER
 	anchored = TRUE
 	machine_tool_behaviour = list(TOOL_ANVIL)
 
-/obj/machinery/anvil/wrench_act(mob/living/user, obj/item/I)
+/obj/structure/anvil/wrench_act(mob/living/user, obj/item/I)
 	default_unfasten_wrench(user, I, 10)
 	return TRUE
 
@@ -38,7 +41,15 @@
 	reqs = list(/obj/item/stack/sheet/leather = 1)
 	category = CAT_SMITH
 	subcategory = CAT_LEATHER
+	tools = list(TOOL_TANNINGRACK)
 
+/datum/crafting_recipe/tanningrack
+	name = "Tanning rack"
+	result = /obj/structure/tanningrack
+	time = 100
+	reqs = list(/obj/item/stack/sheet/mineral/wood = 10)
+	category = CAT_SMITH
+	subcategory = CAT_LEATHER
 
 //CRAFTIRON
 
@@ -47,90 +58,83 @@
 	result = /obj/item/stack/sheet/mineral/TES/iron
 	time = 10
 	reqs = list(/obj/item/stack/ore/iron = 1)
-	tools = list(TOOL_FORGE)
 	category = CAT_SMITH
 	subcategory = CAT_IRON
 
-
-//CRAFTSTEEL
-
-/datum/crafting_recipe/steelingot
-	name = "Steel ingot"
-	result = /obj/item/stack/sheet/mineral/TES/steel
-	time = 10
-	reqs = list(/obj/item/stack/ore/iron = 1, /obj/item/stack/ore/corundum = 1)
-	tools = list(TOOL_FORGE)
+/datum/crafting_recipe/anvil
+	name = "Anvil"
+	result =  /obj/structure/anvil
+	time = 100
+	reqs = list(/obj/item/stack/sheet/mineral/TES/iron = 10)
 	category = CAT_SMITH
-	subcategory = CAT_STEEL
+	subcategory = CAT_IRON
 
-
-//CRAFTELVEN
-
-/datum/crafting_recipe/elveningot
-	name = "Refined moonstone"
-	result = /obj/item/stack/sheet/mineral/TES/elven
-	time = 10
-	reqs = list(/obj/item/stack/ore/moonstone = 2)
-	tools = list(TOOL_FORGE)
+/datum/crafting_recipe/irondagger
+	name = "Iron dagger"
+	result = /obj/item/kitchen/knife/dagger
+	time = 30
+	reqs = list(/obj/item/stack/sheet/mineral/TES/iron = 1,
+				/obj/item/stack/sheet/mineral/TES/leather = 1)
+	tools = list(TOOL_ANVIL)
 	category = CAT_SMITH
-	subcategory = CAT_ELVEN
+	subcategory = CAT_IRON
 
-
-//CRAFTDWARVEN
-
-/datum/crafting_recipe/dwarveningot
-	name = "Dwarven ingot"
-	result = /obj/item/stack/sheet/mineral/TES/dwarven
-	time = 10
-	reqs = list(/obj/item/stack/ore/dwarven = 2)
-	tools = list(TOOL_FORGE)
+/datum/crafting_recipe/ironsword
+	name = "Iron sword"
+	result = /obj/item/claymore/sword
+	time = 30
+	reqs = list(/obj/item/stack/sheet/mineral/TES/iron = 3,
+				/obj/item/stack/sheet/mineral/TES/leather = 2)
+	tools = list(TOOL_ANVIL)
 	category = CAT_SMITH
-	subcategory = CAT_DWARVEN
+	subcategory = CAT_IRON
 
-
-//CRAFTORCISH
-
-/datum/crafting_recipe/orcishingot
-	name = "Orichalcum ingot"
-	result = /obj/item/stack/sheet/mineral/TES/orcish
-	time = 10
-	reqs = list(/obj/item/stack/ore/orcish = 2)
-	tools = list(TOOL_FORGE)
+/datum/crafting_recipe/ironmace
+	name = "Iron mace"
+	result = /obj/item/claymore/mace
+	time = 30
+	reqs = list(/obj/item/stack/sheet/mineral/TES/iron = 3,
+				/obj/item/stack/sheet/mineral/TES/leather = 2)
+	tools = list(TOOL_ANVIL)
 	category = CAT_SMITH
-	subcategory = CAT_ORCISH
+	subcategory = CAT_IRON
 
-
-//CRAFTGLASS
-
-/datum/crafting_recipe/glassingot
-	name = "Refined malachite"
-	result = /obj/item/stack/sheet/mineral/TES/glass
-	time = 10
-	reqs = list(/obj/item/stack/ore/malachite = 2)
-	tools = list(TOOL_FORGE)
+/datum/crafting_recipe/ironaxe
+	name = "Iron waraxe"
+	result = /obj/item/hatchet/waraxe
+	time = 30
+	reqs = list(/obj/item/stack/sheet/mineral/TES/iron = 3,
+				/obj/item/stack/sheet/mineral/TES/leather = 2)
+	tools = list(TOOL_ANVIL)
 	category = CAT_SMITH
-	subcategory = CAT_GLASS
+	subcategory = CAT_IRON
 
-
-//CRAFTEBONY
-
-/datum/crafting_recipe/ebonyingot
-	name = "Ebony ingot"
-	result = /obj/item/stack/sheet/mineral/TES/ebony
-	time = 10
-	reqs = list(/obj/item/stack/ore/ebony = 2)
-	tools = list(TOOL_FORGE)
+/datum/crafting_recipe/irongsword
+	name = "Iron greatsword"
+	result = /obj/item/twohanded/fireaxe/gsword
+	time = 30
+	reqs = list(/obj/item/stack/sheet/mineral/TES/iron = 5,
+				/obj/item/stack/sheet/mineral/TES/leather = 3)
+	tools = list(TOOL_ANVIL)
 	category = CAT_SMITH
-	subcategory = CAT_EBONY
+	subcategory = CAT_IRON
 
-
-//CRAFTDRAGON
-
-/datum/crafting_recipe/dragoningot
-	name = "Refined dragonscales"
-	result = /obj/item/stack/sheet/mineral/TES/dragon
-	time = 10
-	reqs = list(/obj/item/stack/ore/dragon = 1)
-	tools = list(TOOL_FORGE)
+/datum/crafting_recipe/ironbaxe
+	name = "Iron battleaxe"
+	result = /obj/item/twohanded/fireaxe/baxe
+	time = 30
+	reqs = list(/obj/item/stack/sheet/mineral/TES/iron = 5,
+				/obj/item/stack/sheet/mineral/TES/leather = 3)
+	tools = list(TOOL_ANVIL)
 	category = CAT_SMITH
-	subcategory = CAT_DRAGON
+	subcategory = CAT_IRON
+
+/datum/crafting_recipe/ironwarham
+	name = "Iron warhammer"
+	result = /obj/item/twohanded/fireaxe/warham
+	time = 30
+	reqs = list(/obj/item/stack/sheet/mineral/TES/iron = 5,
+				/obj/item/stack/sheet/mineral/TES/leather = 3)
+	tools = list(TOOL_ANVIL)
+	category = CAT_SMITH
+	subcategory = CAT_IRON

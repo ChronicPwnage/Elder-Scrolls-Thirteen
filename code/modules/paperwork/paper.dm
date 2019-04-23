@@ -7,6 +7,7 @@
 
 /obj/item/paper
 	name = "paper"
+	desc = "A simple piece of paper."
 	gender = NEUTER
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "paper"
@@ -22,6 +23,8 @@
 	max_integrity = 50
 	dog_fashion = /datum/dog_fashion/head
 
+	var/sealed = 0 //is it a sealed envelope?
+	var/sealtype = null
 	var/info		//What's actually written on the paper.
 	var/info_links	//A different version of the paper which includes html links at fields and EOF
 	var/stamps		//The (text for the) stamps on the paper.
@@ -56,6 +59,9 @@
 	if(resistance_flags & ON_FIRE)
 		icon_state = "paper_onfire"
 		return
+	if(sealed == 1)
+		icon_state = "sealed_[sealtype]"
+		return
 	if(info)
 		icon_state = "paper_words"
 		return
@@ -66,16 +72,16 @@
 	..()
 	var/datum/asset/assets = get_asset_datum(/datum/asset/spritesheet/simple/paper)
 	assets.send(user)
-
-	if(in_range(user, src) || isobserver(user))
-		if(user.is_literate())
-			user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info]<HR>[stamps]</BODY></HTML>", "window=[name]")
-			onclose(user, "[name]")
+	if(sealed == 0)
+		if(in_range(user, src) || isobserver(user))
+			if(user.is_literate())
+				user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info]<HR>[stamps]</BODY></HTML>", "window=[name]")
+				onclose(user, "[name]")
+			else
+				user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[stars(info)]<HR>[stamps]</BODY></HTML>", "window=[name]")
+				onclose(user, "[name]")
 		else
-			user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[stars(info)]<HR>[stamps]</BODY></HTML>", "window=[name]")
-			onclose(user, "[name]")
-	else
-		to_chat(user, "<span class='warning'>You're too far away to read it!</span>")
+			to_chat(user, "<span class='warning'>You're too far away to read it!</span>")
 
 
 /obj/item/paper/verb/rename()
@@ -83,6 +89,8 @@
 	set category = "Object"
 	set src in usr
 
+	if(sealed == 1)
+		return
 	if(usr.incapacitated() || !usr.is_literate())
 		return
 	if(ishuman(usr))
@@ -106,12 +114,18 @@
 	spam_flag = FALSE
 
 /obj/item/paper/attack_self(mob/user)
-	user.examinate(src)
-	if(rigged && (SSevents.holidays && SSevents.holidays[APRIL_FOOLS]))
-		if(!spam_flag)
-			spam_flag = TRUE
-			playsound(loc, 'sound/items/bikehorn.ogg', 50, 1)
-			addtimer(CALLBACK(src, .proc/reset_spamflag), 20)
+	if(sealed == 0)
+		user.examinate(src)
+		if(rigged && (SSevents.holidays && SSevents.holidays[APRIL_FOOLS]))
+			if(!spam_flag)
+				spam_flag = TRUE
+				playsound(loc, 'sound/items/bikehorn.ogg', 50, 1)
+				addtimer(CALLBACK(src, .proc/reset_spamflag), 20)
+	else
+		to_chat(user, "<span class='warning'>You break open the seal and discard the envelope.</span>")
+		sealed = 0
+		desc = "A simple piece of paper."
+		update_icon()
 
 
 /obj/item/paper/attack_ai(mob/living/silicon/ai/user)
@@ -245,7 +259,8 @@
 	var/literate = usr.is_literate()
 	if(!usr.canUseTopic(src, BE_CLOSE, literate))
 		return
-
+	if(sealed == 1)
+		return
 	if(href_list["help"])
 		openhelp(usr)
 		return
@@ -286,7 +301,22 @@
 	if(is_blind(user))
 		return
 
+	if(istype(P, /obj/item/seal))
+		if(sealed == 0)
+			to_chat(user, "<span class='notice'>You seal the paper with the [P.name].</span>")
+			sealed = 1
+			sealtype = P.icon_state
+			name = "sealed envelope"
+			desc = "A simple piece of paper. It's sealed with the [P.name]."
+			update_icon()
+			return
+		else
+			to_chat(user, "<span class='notice'>You find the notion of sealing a piece of paper twice a little absurd.</span>")
+			return
+
 	if(istype(P, /obj/item/pen) || istype(P, /obj/item/toy/crayon))
+		if(sealed == 1)
+			return
 		if(user.is_literate())
 			user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info_links]<HR>[stamps]</BODY><div align='right'style='position:fixed;bottom:0;font-style:bold;'><A href='?src=[REF(src)];help=1'>\[?\]</A></div></HTML>", "window=[name]")
 			return
@@ -295,7 +325,8 @@
 			return
 
 	else if(istype(P, /obj/item/stamp))
-
+		if(sealed == 1)
+			return
 		if(!in_range(src, user))
 			return
 
