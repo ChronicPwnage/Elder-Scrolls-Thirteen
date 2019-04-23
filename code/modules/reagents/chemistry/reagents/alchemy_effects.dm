@@ -261,3 +261,22 @@
 	M.IgniteMob()
 	..()
 	return TRUE
+
+/datum/reagent/potion/hawkeye
+	name = "Hawkeye"
+	id = "hawkeye"
+	taste_description = "feathers"
+
+/datum/reagent/potion/hawkeye/on_mob_add(mob/M)
+	var/obj/item/organ/eyes/eyes = M.getorgan(/obj/item/organ/eyes)
+	eyes.see_in_dark = 10
+	eyes.lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
+	eyes.Insert(M)
+	M.client.change_view(10)
+
+/datum/reagent/potion/hawkeye/on_mob_delete(mob/M)
+	var/obj/item/organ/eyes/eyes = M.getorgan(/obj/item/organ/eyes)
+	eyes.see_in_dark = initial(M.see_in_dark)
+	eyes.lighting_alpha = initial(M.lighting_alpha)
+	eyes.Insert(M)
+	M.client.change_view(7)
