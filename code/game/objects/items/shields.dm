@@ -10,12 +10,12 @@
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
 	max_integrity = 200
+	var/broken = FALSE //Is it broken?
 	var/cooldown = 0
 	var/shield_type = "kite"
 	var/main_material = "iron"
 	var/materials_deconstruct = list(MAT_IRON=4, MAT_LEATHER=2)
 	var/transparent = FALSE	// makes beam projectiles pass through the shield
-	var/broken_shield = "/obj/item/shield/broken" // the broken version of the shield, to drop upon breaking
 
 /obj/item/shield/proc/on_shield_block(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", damage = 0, attack_type = MELEE_ATTACK)
 	return TRUE
@@ -29,21 +29,15 @@
 
 /obj/item/shield/proc/shield_break(mob/living/carbon/human/owner, atom/movable/hitby)
 	//playsound(get_turf(src), 'sound/effects/glassbr3.ogg', 100) //TODO: Replace, make it play for everyone
+	broken = TRUE
 	var/turf/T = get_turf(owner)
 	T.visible_message("<span class='warning'>[hitby] destroys [src]!</span>")
-	qdel(src)
-	new broken_shield((get_turf(src)))
-
-/obj/item/shield/proc/shield_fix()
-
-/obj/item/shield/broken
-	name = "broken shield"
+	name = "broken [initial(name)]"
 	icon_state = "shield_broken"
 	block_chance = 10
 	force = 5
-	materials_deconstruct = list(MAT_IRON=1, MAT_LEATHER=1)
-	main_material = "iron"
-	max_integrity = 100
+
+/obj/item/shield/proc/shield_fix()
 
 /obj/item/shield/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
 	if(transparent && (hitby.pass_flags & PASSGLASS))
@@ -102,14 +96,6 @@
 	main_material = "iron"
 	max_integrity = 200
 	broken_shield = "/obj/item/shield/kite/iron/broken" // the broken version of the shield, to drop upon breaking
-
-/obj/item/shield/kite/iron/broken
-	name = "broken iron kiteshield"
-	desc = "A mid-sized shield that balances mobility and protection. This one is made out of iron, and is broken beyond any use as a shield and must be repaired."
-	icon_state = "kiteshield_iron"
-	block_chance = 0
-	force = 10
-	materials_deconstruct = list(MAT_IRON=1, MAT_LEATHER=1)
 /*
 /obj/item/shield/kite/proc/shield_break(mob/living/carbon/human/owner)
 	//playsound(owner, 'sound/effects/glassbr3.ogg', 100) //TODO: Replace, make it play for everyone
@@ -122,7 +108,7 @@
 									/////	DWEMER KITESHIELD	/////
 
 									/////	SQUARE SHIELDS	/////
-/obj/item/shield/square/iron
+/obj/item/shield/twohanded/square/iron
 	shield_type = "square"
 	name = "iron square shield"
 	desc = "A large-sized shield that sacrifices mobility for protection. This one is made out of iron."
@@ -137,36 +123,7 @@
 	main_material = "iron"
 	max_integrity = 300
 
-/obj/item/shield/square/iron/broken
-	name = "broken iron square shield"
-	desc = "A large-sized shield that sacrifices mobility for protection. This one is made out of iron, and is broken beyond any use as a shield and must be repaired."
-	icon_state = "squareshield_iron"
-	block_chance = 0
-	force = 10
-	materials_deconstruct = list(MAT_IRON=1, MAT_LEATHER=1)
-
-/obj/item/shield/riot/roman
-	name = "\improper Roman shield"
-	desc = "Bears an inscription on the inside: <i>\"Romanes venio domus\"</i>."
-	icon_state = "roman_shield"
-	item_state = "roman_shield"
-	lefthand_file = 'icons/mob/inhands/equipment/shields_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/equipment/shields_righthand.dmi'
-	transparent = FALSE
-	materials_deconstruct = list(MAT_METAL=8500)
-	max_integrity = 65
-
-/obj/item/shield/riot/roman/fake
-	desc = "Bears an inscription on the inside: <i>\"Romanes venio domus\"</i>. It appears to be a bit flimsy."
-	block_chance = 0
-	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	max_integrity = 30
-
-/obj/item/shield/riot/roman/shield_break(mob/living/carbon/human/owner)
-	playsound(owner, 'sound/effects/grillehit.ogg', 100)
-	new /obj/item/stack/sheet/metal(get_turf(src))
-
-/obj/item/shield/riot/buckler
+/obj/item/shield/buckler
 	name = "wooden buckler"
 	desc = "A medieval wooden buckler."
 	icon_state = "buckler"
@@ -180,72 +137,205 @@
 	max_integrity = 55
 	w_class = WEIGHT_CLASS_NORMAL
 
-/obj/item/shield/riot/buckler/shield_break(mob/living/carbon/human/owner)
-	playsound(owner, 'sound/effects/bang.ogg', 50)
-	new /obj/item/stack/sheet/mineral/wood(get_turf(src))
+/*
+ * TWOHANDING SHIELDS
+ */
+/obj/item/shield/twohanded
+	var/wielded = 0
+	var/force_unwielded = 0
+	var/force_wielded = 0
+	var/block_chance_unwielded = 0
+	var/block_chance_wielded = 0
+	var/slowdown_unwielded = 0
+	var/slowdown_wielded = 0
+	var/wieldsound = null
+	var/unwieldsound = null
 
-/obj/item/shield/riot/flash
-	name = "strobe shield"
-	desc = "A shield with a built in, high intensity light capable of blinding and disorienting suspects. Takes regular handheld flashes as bulbs."
-	icon_state = "flashshield"
-	item_state = "flashshield"
-	var/obj/item/assembly/flash/handheld/embedded_flash
-
-/obj/item/shield/riot/flash/Initialize()
-	. = ..()
-	embedded_flash = new(src)
-
-/obj/item/shield/riot/flash/attack(mob/living/M, mob/user)
-	. =  embedded_flash.attack(M, user)
+/obj/item/shield/twohanded/proc/unwield(mob/living/carbon/user, show_message = TRUE)
+	if(!wielded || !user)
+		return
+	wielded = 0
+	if(force_unwielded)
+		force = force_unwielded
+	if(block_chance_unwielded)
+		block_chance = block_chance_unwielded
+	var/sf = findtext(name," (Wielded)")
+	if(sf)
+		name = copytext(name,1,sf)
+	else //something wrong
+		name = "[initial(name)]"
 	update_icon()
-
-/obj/item/shield/riot/flash/attack_self(mob/living/carbon/user)
-	. = embedded_flash.attack_self(user)
-	update_icon()
-
-/obj/item/shield/riot/flash/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
-	. = ..()
-	if (. && !embedded_flash.burnt_out)
-		embedded_flash.activate()
-		update_icon()
-
-
-/obj/item/shield/riot/flash/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/assembly/flash/handheld))
-		var/obj/item/assembly/flash/handheld/flash = W
-		if(flash.burnt_out)
-			to_chat(user, "No sense replacing it with a broken bulb.")
-			return
-		else
-			to_chat(user, "You begin to replace the bulb.")
-			if(do_after(user, 20, target = user))
-				if(flash.burnt_out || !flash || QDELETED(flash))
-					return
-				playsound(src, 'sound/items/deconstruct.ogg', 50, TRUE)
-				qdel(embedded_flash)
-				embedded_flash = flash
-				flash.forceMove(src)
-				update_icon()
-				return
-	..()
-
-/obj/item/shield/riot/flash/emp_act(severity)
-	. = ..()
-	embedded_flash.emp_act(severity)
-	update_icon()
-
-/obj/item/shield/riot/flash/update_icon()
-	if(!embedded_flash || embedded_flash.burnt_out)
-		icon_state = "riot"
-		item_state = "riot"
+	if(user.get_item_by_slot(SLOT_BACK) == src)
+		user.update_inv_back()
 	else
-		icon_state = "flashshield"
-		item_state = "flashshield"
+		user.update_inv_hands()
+	if(show_message)
+		to_chat(user, "<span class='notice'>You are now carrying [src] with one hand.</span>")
+	if(unwieldsound)
+		playsound(loc, unwieldsound, 50, 1)
+	var/obj/item/shield/twohanded/offhand/O = user.get_inactive_held_item()
+	if(O && istype(O))
+		O.unwield()
+	return
 
-/obj/item/shield/riot/flash/examine(mob/user)
+/obj/item/shield/twohanded/proc/wield(mob/living/carbon/user)
+	if(wielded)
+		return
+	if(ismonkey(user))
+		to_chat(user, "<span class='warning'>It's too heavy for you to wield fully.</span>")
+		return
+	if(user.get_inactive_held_item())
+		to_chat(user, "<span class='warning'>You need your other hand to be empty!</span>")
+		return
+	if(user.get_num_arms() < 2)
+		to_chat(user, "<span class='warning'>You don't have enough intact hands.</span>")
+		return
+	wielded = 1
+	if(force_wielded)
+		force = force_wielded
+	if(block_chance_wielded)
+		block_chance = block_chance_wielded
+	name = "[name] (Wielded)"
+	update_icon()
+	else
+		to_chat(user, "<span class='notice'>You grab [src] with both hands.</span>")
+	if (wieldsound)
+		playsound(loc, wieldsound, 50, 1)
+	var/obj/item/shield/twohanded/offhand/O = new(user) ////Let's reserve his other hand~
+	O.name = "[name] - offhand"
+	O.desc = "Your second grip on [src]."
+	O.wielded = TRUE
+	user.put_in_inactive_hand(O)
+	return
+
+/obj/item/shield/twohanded/dropped(mob/user)
+	. = ..()
+	//handles unwielding a shield/twohanded weapon when dropped as well as clearing up the offhand
+	if(!wielded)
+		return
+	unwield(user)
+
+/obj/item/shield/twohanded/update_icon()
+	return
+
+/obj/item/shield/twohanded/attack_self(mob/user)
+	. = ..()
+	if(wielded) //Trying to unwield it
+		unwield(user)
+	else //Trying to wield it
+		wield(user)
+
+/obj/item/shield/twohanded/equip_to_best_slot(mob/M)
+	if(..())
+		if(istype(src, /obj/item/shield/twohanded/required))
+			return // unwield forces shield/twohanded-required items to be dropped.
+		unwield(M)
+		return
+
+/obj/item/shield/twohanded/equipped(mob/user, slot)
 	..()
-	to_chat(user, "<span class='info'>The mounted bulb has burnt out. You can try replacing it with a new one.</span>")
+	if(!user.is_holding(src) && wielded && !istype(src, /obj/item/shield/twohanded/required))
+		unwield(user)
 
+///////////OFFHAND///////////////
+/obj/item/shield/twohanded/offhand
+	name = "offhand"
+	icon_state = "offhand"
+	w_class = WEIGHT_CLASS_HUGE
+	item_flags = ABSTRACT
+	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
+
+/obj/item/shield/twohanded/offhand/Destroy()
+	wielded = FALSE
+	return ..()
+
+/obj/item/shield/twohanded/offhand/dropped(mob/living/user, show_message = TRUE) //Only utilized by dismemberment since you can't normally switch to the offhand to drop it.
+	var/obj/I = user.get_active_held_item()
+	if(I && istype(I, /obj/item/shield/twohanded))
+		var/obj/item/shield/twohanded/thw = I
+		thw.unwield(user, show_message)
+		if(istype(thw, /obj/item/shield/twohanded/required))
+			user.dropItemToGround(thw)
+	if(!QDELETED(src))
+		qdel(src)
+
+/obj/item/shield/twohanded/offhand/unwield()
+	if(wielded)//Only delete if we're wielded
+		wielded = FALSE
+		qdel(src)
+
+/obj/item/shield/twohanded/offhand/wield()
+	if(wielded)//Only delete if we're wielded
+		wielded = FALSE
+		qdel(src)
+
+/obj/item/shield/twohanded/offhand/attack_self(mob/living/carbon/user)		//You should never be able to do this in standard use of two handed items. This is a backup for lingering offhands.
+	var/obj/item/shield/twohanded/O = user.get_inactive_held_item()
+	if (istype(O) && !istype(O, /obj/item/shield/twohanded/offhand/))		//If you have a proper item in your other hand that the offhand is for, do nothing. This should never happen.
+		return
+	if (QDELETED(src))
+		return
+	qdel(src)																//If it's another offhand, or literally anything else, qdel. If I knew how to add logging messages I'd put one here.
+
+///////////Two hand required objects///////////////
+//This is for objects that require two hands to even pick up
+/obj/item/shield/twohanded/required
+	w_class = WEIGHT_CLASS_HUGE
+
+/obj/item/shield/twohanded/required/attack_self()
+	return
+
+/obj/item/shield/twohanded/required/mob_can_equip(mob/M, mob/equipper, slot, disable_warning = 0)
+	if(wielded && !slot_flags)
+		if(!disable_warning)
+			to_chat(M, "<span class='warning'>[src] is too cumbersome to carry with anything but your hands!</span>")
+		return 0
+	return ..()
+
+/obj/item/shield/twohanded/required/attack_hand(mob/user)//Can't even pick it up without both hands empty
+	var/obj/item/shield/twohanded/required/H = user.get_inactive_held_item()
+	if(get_dist(src,user) > 1)
+		return
+	if(H != null)
+		to_chat(user, "<span class='notice'>[src] is too cumbersome to carry in one hand!</span>")
+		return
+	if(loc != user)
+		wield(user)
+	. = ..()
+
+/obj/item/shield/twohanded/required/equipped(mob/user, slot)
+	..()
+	var/slotbit = slotdefine2slotbit(slot)
+	if(slot_flags & slotbit)
+		var/datum/O = user.is_holding_item_of_type(/obj/item/shield/twohanded/offhand)
+		if(!O || QDELETED(O))
+			return
+		qdel(O)
+		return
+	if(slot == SLOT_HANDS)
+		wield(user)
+	else
+		unwield(user)
+
+/obj/item/shield/twohanded/required/dropped(mob/living/user, show_message = TRUE)
+	unwield(user, show_message)
+	..()
+
+/obj/item/shield/twohanded/required/wield(mob/living/carbon/user)
+	..()
+	if(!wielded)
+		user.dropItemToGround(src)
+
+/obj/item/shield/twohanded/required/unwield(mob/living/carbon/user, show_message = TRUE)
+	if(!wielded)
+		return
+	if(show_message)
+		to_chat(user, "<span class='notice'>You drop [src].</span>")
+	..(user, FALSE)
+
+
+/*	ENERGY SHIELD (for future coding reference, potential magic shields etc)	*/
+/*
 /obj/item/shield/energy
 	name = "energy combat shield"
 	desc = "A shield that reflects almost all energy projectiles, but is useless against physical attacks. It can be retracted, expanded, and stored anywhere."
@@ -297,44 +387,4 @@
 		playsound(user, 'sound/weapons/saberoff.ogg', 35, 1)
 		to_chat(user, "<span class='notice'>[src] can now be concealed.</span>")
 	add_fingerprint(user)
-
-/obj/item/shield/riot/tele
-	name = "telescopic shield"
-	desc = "An advanced riot shield made of lightweight materials_deconstruct that collapses for easy storage."
-	icon = 'icons/obj/items_and_weapons.dmi'
-	icon_state = "teleriot0"
-	lefthand_file = 'icons/mob/inhands/equipment/shields_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/equipment/shields_righthand.dmi'
-	slot_flags = null
-	force = 3
-	throwforce = 3
-	throw_speed = 3
-	throw_range = 4
-	w_class = WEIGHT_CLASS_NORMAL
-	var/active = 0
-
-/obj/item/shield/riot/tele/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
-	if(active)
-		return ..()
-	return 0
-
-/obj/item/shield/riot/tele/attack_self(mob/living/user)
-	active = !active
-	icon_state = "teleriot[active]"
-	playsound(src.loc, 'sound/weapons/batonextend.ogg', 50, 1)
-
-	if(active)
-		force = 8
-		throwforce = 5
-		throw_speed = 2
-		w_class = WEIGHT_CLASS_BULKY
-		slot_flags = ITEM_SLOT_BACK
-		to_chat(user, "<span class='notice'>You extend \the [src].</span>")
-	else
-		force = 3
-		throwforce = 3
-		throw_speed = 3
-		w_class = WEIGHT_CLASS_NORMAL
-		slot_flags = null
-		to_chat(user, "<span class='notice'>[src] can now be concealed.</span>")
-	add_fingerprint(user)
+*/
