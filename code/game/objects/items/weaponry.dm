@@ -143,7 +143,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	item_state = "claymore"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'sound/weapons/chainhit.ogg'
 	slot_flags = ITEM_SLOT_BELT
 	force = 20
 	armour_penetration = 30
@@ -159,7 +159,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	item_state = "claymore"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'sound/weapons/chainhit.ogg'
 	force = 25
 	armour_penetration = 35
 	throwforce = 10
@@ -171,7 +171,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	item_state = "claymore"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'sound/weapons/chainhit.ogg'
 	force = 30
 	armour_penetration = 40
 	throwforce = 15
@@ -183,7 +183,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	item_state = "claymore"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'sound/weapons/chainhit.ogg'
 	force = 35
 	armour_penetration = 45
 	throwforce = 15
@@ -195,7 +195,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	item_state = "claymore"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'sound/weapons/chainhit.ogg'
 
 /obj/item/claymore/Initialize()
 	. = ..()
