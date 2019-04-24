@@ -526,13 +526,30 @@
 
 /datum/admins/proc/toggleoocdead()
 	set category = "Server"
-	set desc="Toggle dis bitch"
+	set desc="" //weird bug makes 'Toggle Dead OOC' info appear when 'OOC' is clicked, sooooo we're just changing it to make it not look ugly- bug also appears in Toggle Dead LOOC
 	set name="Toggle Dead OOC"
 	toggle_dooc()
-
 	log_admin("[key_name(usr)] toggled OOC.")
 	message_admins("[key_name_admin(usr)] toggled Dead OOC.")
 	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggle Dead OOC", "[GLOB.dooc_allowed ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/datum/admins/proc/togglelooc()
+	set category = "Server"
+	set desc = "can you even see verb descriptions anywhere?"
+	set name = "Toggle LOOC"
+	toggle_looc()
+	log_admin("[key_name(usr)] toggled LOOC.")
+	message_admins("[key_name_admin(usr)] toggled LOOC.")
+	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggle LOOC", "[GLOB.looc_allowed ? "Enabled" : "Disabled"]"))
+
+/datum/admins/proc/toggleloocdead()
+	set category = "Server"
+	set desc = "Local OOC, seen only by those in view." //weird bug makes 'Toggle Dead LOOC' info appear when 'LOOC' is clicked, sooooo we're just changing it to make it not look ugly
+	set name = "Toggle Dead LOOC"
+	toggle_dlooc()
+	log_admin("[key_name(usr)] toggled Dead LOOC.")
+	message_admins("[key_name_admin(usr)] toggled Dead LOOC.")
+	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggle Dead LOOC", "[GLOB.dlooc_allowed ? "Enabled" : "Disabled"]"))
 
 /datum/admins/proc/startnow()
 	set category = "Server"
