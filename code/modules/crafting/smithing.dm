@@ -2,7 +2,7 @@
 	name = "tanning rack"
 	desc = "A wooden tanning rack used for crafting items out of leather."
 	icon = 'icons/obj/cult.dmi' //needs sprites
-	icon_state = "forge" //needs sprites
+	icon_state = "anvil" //needs sprites
 	resistance_flags = INDESTRUCTIBLE
 	density = TRUE
 	layer = BELOW_OBJ_LAYER
@@ -19,8 +19,8 @@
 /obj/structure/anvil
 	name = "metalworking anvil"
 	desc = "An anvil used for making low-quality weapons and armor. You can imagine yourself making iron daggers here for a long time."
-	icon = 'icons/obj/cult.dmi' //needs sprites
-	icon_state = "forge" //needs sprites
+	icon = 'icons/obj/cult.dmi'
+	icon_state = "anvil"
 	resistance_flags = INDESTRUCTIBLE
 	density = TRUE
 	layer = BELOW_OBJ_LAYER

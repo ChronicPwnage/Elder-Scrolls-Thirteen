@@ -7,7 +7,7 @@
 	density = TRUE
 	layer = BELOW_OBJ_LAYER
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "mixer0"
+	icon_state = "alch0"
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 20
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
@@ -28,7 +28,7 @@
 	//Calculate the span tags and ids fo all the available pill icons
 	var/datum/asset/spritesheet/simple/assets = get_asset_datum(/datum/asset/spritesheet/simple/pills)
 	pillStyles = list()
-	for (var/x in 1 to PILL_STYLE_COUNT)
+	for (var/x in 1 to 1)
 		var/list/SL = list()
 		SL["id"] = x
 		SL["htmltag"] = assets.icon_tag("pill[x]")
@@ -68,12 +68,10 @@
 
 /obj/machinery/chem_master/update_icon()
 	cut_overlays()
-	if (stat & BROKEN)
-		add_overlay("waitlight")
 	if(beaker)
-		icon_state = "mixer1"
+		icon_state = "alch1"
 	else
-		icon_state = "mixer0"
+		icon_state = "alch0"
 
 /obj/machinery/chem_master/blob_act(obj/structure/blob/B)
 	if (prob(50))
@@ -95,15 +93,6 @@
 		to_chat(user, "<span class='notice'>You add [B] to [src].</span>")
 		updateUsrDialog()
 		update_icon()
-	else if(!condi && istype(I, /obj/item/storage/pill_bottle))
-		if(bottle)
-			to_chat(user, "<span class='warning'>A pill bottle is already loaded into [src]!</span>")
-			return
-		if(!user.transferItemToLoc(I, src))
-			return
-		bottle = I
-		to_chat(user, "<span class='notice'>You add [I] into the dispenser slot.</span>")
-		updateUsrDialog()
 	else
 		return ..()
 
@@ -228,18 +217,18 @@
 			mode = !mode
 			. = TRUE
 
-		if("createPill")
+		if("createPill")/*
 			var/many = params["many"]
 			if(reagents.total_volume == 0)
 				return
 			if(!condi)
 				var/amount = 1
-				var/vol_each = min(reagents.total_volume, 50)
+				var/vol_each = min(reagents.total_volume, 0)
 				if(text2num(many))
-					amount = CLAMP(round(input(usr, "Max 10. Buffer content will be split evenly.", "How many pills?", amount) as num|null), 0, 10)
+					amount = CLAMP(round(input(usr, "Max 0. Buffer content will be split evenly.", "How many pills?", amount) as num|null), 0, 0)
 					if(!amount)
 						return
-					vol_each = min(reagents.total_volume / amount, 50)
+					vol_each = min(reagents.total_volume / amount, 0)
 				var/name = stripped_input(usr,"Name:","Name your pill!", "[reagents.get_master_reagent_name()] ([vol_each]u)", MAX_NAME_LEN)
 				if(!name || !reagents.total_volume || !src || QDELETED(src) || !usr.canUseTopic(src, !issilicon(usr)))
 					return
@@ -275,13 +264,17 @@
 				P.name = trim("[name] pack")
 				P.desc = "A small condiment pack. The label says it contains [name]."
 				reagents.trans_to(P,10, transfered_by = usr)
-			. = TRUE
+			. = TRUE*/
+			return
 
 		if("pillStyle")
-			var/id = text2num(params["id"])
-			chosenPillStyle = id
+			return
+			/*var/id = text2num(params["id"])
+			chosenPillStyle = id*/
 
 		if("createPatch")
+			return
+			/*
 			var/many = params["many"]
 			if(reagents.total_volume == 0)
 				return
@@ -302,7 +295,7 @@
 				P.name = trim("[name] patch")
 				adjust_item_drop_location(P)
 				reagents.trans_to(P,vol_each, transfered_by = usr)
-			. = TRUE
+			. = TRUE*/
 
 		if("createBottle")
 			var/many = params["many"]

@@ -394,37 +394,3 @@
 	name = "Plastic"
 	id = MAT_PLASTIC
 	sheet_type = /obj/item/stack/sheet/plastic
-
-//TES13
-
-/datum/material/leather
-	name = "Leather"
-	id = MAT_LEATHER
-
-/datum/material/corundum
-	name = "Corundum"
-	id = MAT_CORUNDUM
-
-/datum/material/elven
-	name = "Moonstone"
-	id = MAT_ELVEN
-
-/datum/material/orcish
-	name = "Orichalcum"
-	id = MAT_ORCISH
-
-/datum/material/dwarven
-	name = "Dwarven metal"
-	id = MAT_DWARVEN
-
-/datum/material/malachite
-	name = "Malachite"
-	id = MAT_MALACHITE
-
-/datum/material/ebony
-	name = "Ebony"
-	id = MAT_EBONY
-
-/datum/material/dragon
-	name = "Dragonscales"
-	id = MAT_DRAGON
