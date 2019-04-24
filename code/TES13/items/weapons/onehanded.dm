@@ -71,8 +71,8 @@
 /obj/item/claymore/mace
 	name = "iron mace"
 	desc = "An iron mace, a good beginner's bludgeon."
-	icon_state = "claymore"
-	item_state = "claymore"
+	icon_state = "iron_mace"
+	item_state = "iron_mace"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
 	hitsound = 'sound/weapons/bladeslice.ogg'
