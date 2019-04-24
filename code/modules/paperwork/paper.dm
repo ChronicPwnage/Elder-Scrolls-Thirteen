@@ -23,7 +23,7 @@
 	max_integrity = 50
 	dog_fashion = /datum/dog_fashion/head
 
-	var/sealed = 0 //is it a sealed envelope?
+	var/sealed = 0 //is it sealed?
 	var/sealtype = null
 	var/info		//What's actually written on the paper.
 	var/info_links	//A different version of the paper which includes html links at fields and EOF
@@ -122,7 +122,7 @@
 				playsound(loc, 'sound/items/bikehorn.ogg', 50, 1)
 				addtimer(CALLBACK(src, .proc/reset_spamflag), 20)
 	else
-		to_chat(user, "<span class='warning'>You break open the seal and discard the envelope.</span>")
+		to_chat(user, "<span class='warning'>You break open the seal and unfold the paper.</span>")
 		sealed = 0
 		desc = "A simple piece of paper."
 		update_icon()
@@ -306,7 +306,7 @@
 			to_chat(user, "<span class='notice'>You seal the paper with the [P.name].</span>")
 			sealed = 1
 			sealtype = P.icon_state
-			name = "sealed envelope"
+			name = "sealed paper"
 			desc = "A simple piece of paper. It's sealed with the [P.name]."
 			update_icon()
 			return

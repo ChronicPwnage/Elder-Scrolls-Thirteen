@@ -181,82 +181,103 @@
 		M.adjust_bodytemperature(80 * TEMPERATURE_DAMAGE_COEFFICIENT, 0, BODYTEMP_NORMAL)
 	..()
 
-/datum/reagent/potion/hawkeye //WIP- increases view range, possibly nightvision
+/datum/reagent/potion/hawkeye
 	name = "Hawkeye"
 	id = "hawkeye"
-	taste_description = "acuity"
+	description = "A potion to enhance the visual acuity of whoever drinks it, allowing them to see better in darkness and for greater distances."
+	taste_description = "feathers"
 
-/datum/reagent/potion/damage_health_weak
+/datum/reagent/potion/hawkeye/on_mob_add(mob/M)
+	var/obj/item/organ/eyes/eyes = M.getorgan(/obj/item/organ/eyes)
+	eyes.see_in_dark = 10
+	eyes.lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
+	eyes.Insert(M)
+	M.client.change_view(10)
+
+/datum/reagent/potion/hawkeye/on_mob_delete(mob/M)
+	var/obj/item/organ/eyes/eyes = M.getorgan(/obj/item/organ/eyes)
+	eyes.see_in_dark = initial(M.see_in_dark)
+	eyes.lighting_alpha = initial(M.lighting_alpha)
+	eyes.Insert(M)
+	M.client.change_view(7)
+
+/datum/reagent/potion/poison
+	name = "generic poison"
+	id = "poison"
+	description = "You shouldn't be seeing this."
+	metabolization_rate = 2 * REAGENTS_METABOLISM
+
+/datum/reagent/potion/poison/damage_health_weak
 	name = "Damage Health (Weak)"
 	id = "damage_health_weak"
 	description = "A weak poison that damages whoever ingests it. Fatal in large quantities."
 	taste_description = "death"
 
-/datum/reagent/potion/damage_health_weak/on_mob_life(mob/living/carbon/M)
+/datum/reagent/potion/poison/damage_health_weak/on_mob_life(mob/living/carbon/M)
 	M.adjustToxLoss(0.8*REM, 0)
 	. = 1
 	..()
 
-/datum/reagent/potion/damage_health_potent
+/datum/reagent/potion/poison/damage_health_potent
 	name = "Damage Health (Potent)"
 	id = "damage_health_potent"
 	description = "A potent poison that severely damages whoever ingests it. Fatal in large quantities."
 	taste_description = "death"
 
-/datum/reagent/potion/damage_health_potent/on_mob_life(mob/living/carbon/M)
+/datum/reagent/potion/poison/damage_health_potent/on_mob_life(mob/living/carbon/M)
 	M.adjustToxLoss(1.6*REM, 0)
 	. = 1
 	..()
 
-/datum/reagent/potion/damage_health_deadly
+/datum/reagent/potion/poison/damage_health_deadly
 	name = "Damage Health (Deadly)"
 	id = "damage_health_deadly"
 	description = "A deadly poison that fatally damages whoever ingests it. Be very careful."
 	taste_description = "death"
 
-/datum/reagent/potion/damage_health_deadly/on_mob_life(mob/living/carbon/M)
+/datum/reagent/potion/poison/damage_health_deadly/on_mob_life(mob/living/carbon/M)
 	M.adjustToxLoss(2.4*REM, 0)
 	. = 1
 	..()
 
-/datum/reagent/potion/damage_stamina
+/datum/reagent/potion/poison/damage_stamina
 	name = "Damage Stamina"
 	id = "damage_stamina"
 	taste_description = "snails"
 
-/datum/reagent/potion/damage_stamina/on_mob_life(mob/living/carbon/M)
+/datum/reagent/potion/poison/damage_stamina/on_mob_life(mob/living/carbon/M)
 	M.adjustStaminaLoss(REM * data, 0)
 	data = max(data - 1, 3)
 	..()
 	. = 1
 
-/datum/reagent/potion/damage_magicka_weak //needs a magicka system before we do this
+/datum/reagent/potion/poison/damage_magicka_weak //needs a magicka system before we do this
 	name = "Damage Magicka (Weak)"
 	id = "damage_magicka_weak"
 	taste_description = "muggles"
 
-/datum/reagent/potion/damage_magicka_potent //needs a magicka system before we do this
+/datum/reagent/potion/poison/damage_magicka_potent //needs a magicka system before we do this
 	name = "Damage Magicka (Potent)"
 	id = "damage_magicka_potent"
 	taste_description = "muggles"
 
-/datum/reagent/potion/damage_magicka_deadly //needs a magicka system before we do this
+/datum/reagent/potion/poison/damage_magicka_deadly //needs a magicka system before we do this
 	name = "Damage Magicka (Deadly)"
 	id = "damage_magicka_deadly"
 	taste_description = "muggles"
 
-/datum/reagent/potion/combustion //needs balancing
+/datum/reagent/potion/poison/combustion //needs balancing
 	name = "Alchemical Combustion"
 	id = "combustion"
 	taste_description = "fire"
 	metabolization_rate = 5 * REAGENTS_METABOLISM
 
-/datum/reagent/potion/combustion/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
+/datum/reagent/potion/poison/combustion/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
 	M.adjust_fire_stacks(0.3)
 	M.IgniteMob()
 	..()
 
-/datum/reagent/potion/combustion/on_mob_life(mob/living/carbon/M)
+/datum/reagent/potion/poison/combustion/on_mob_life(mob/living/carbon/M)
 	M.adjust_fire_stacks(0.3)
 	M.IgniteMob()
 	..()

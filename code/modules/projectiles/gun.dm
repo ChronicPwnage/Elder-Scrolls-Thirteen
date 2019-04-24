@@ -108,10 +108,11 @@
 
 /obj/item/gun/examine(mob/user)
 	..()
-	if(pin)
-		to_chat(user, "It has \a [pin] installed.")
-	else
-		to_chat(user, "It doesn't have a <b>firing pin</b> installed, and won't fire.")
+	if(!istype(src, /obj/item/gun/bow))
+		if(pin)
+			to_chat(user, "It has \a [pin] installed.")
+		else
+			to_chat(user, "It doesn't have a <b>firing pin</b> installed, and won't fire.")
 
 	if(gun_light)
 		to_chat(user, "It has \a [gun_light] [can_flashlight ? "" : "permanently "]mounted on it.")

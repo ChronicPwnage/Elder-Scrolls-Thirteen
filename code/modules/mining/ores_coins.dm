@@ -189,55 +189,6 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	item_state = "slag"
 	singular_name = "slag chunk"
 
-/obj/item/stack/ore/corundum
-	name = "corundum ore"
-	icon_state = "slag" //needs sprites
-	item_state = "slag" //needs sprites
-	singular_name = "corundum ore chunk"
-	materials = list(MAT_CORUNDUM=MINERAL_MATERIAL_AMOUNT)
-
-/obj/item/stack/ore/moonstone
-	name = "moonstone ore"
-	icon_state = "Gold ore" //needs sprites
-	item_state = "Gold ore" //needs sprites
-	singular_name = "moonstone ore chunk"
-	materials = list(MAT_ELVEN=MINERAL_MATERIAL_AMOUNT)
-
-/obj/item/stack/ore/orcish
-	name = "oricalchum ore"
-	icon_state = "Uranium ore" //needs sprites
-	item_state = "Uranium ore" //needs sprites
-	singular_name = "oricalchum ingot"
-	materials = list(MAT_ORCISH=MINERAL_MATERIAL_AMOUNT)
-
-/obj/item/stack/ore/dwarven
-	name = "dwarven scrap"
-	icon_state = "construction_drone_off" //needs sprites
-	item_state = "construction_drone_off" //needs sprites
-	singular_name = "dwarven scrap chunk"
-	materials = list(MAT_DWARVEN=MINERAL_MATERIAL_AMOUNT)
-
-/obj/item/stack/ore/malachite
-	name = "malachite ore"
-	icon_state = "Uranium ore" //needs sprites
-	item_state = "Uranium ore" //needs sprites
-	singular_name = "malachite ore"
-	materials = list(MAT_MALACHITE=MINERAL_MATERIAL_AMOUNT)
-
-/obj/item/stack/ore/ebony
-	name = "ebony ore"
-	icon_state = "Adamantine ore" //needs sprites
-	item_state = "Adamantine ore" //needs sprites
-	singular_name = "ebony ingot"
-	materials = list(MAT_EBONY=MINERAL_MATERIAL_AMOUNT)
-
-/obj/item/stack/ore/dragon
-	name = "dragon scales"
-	icon_state = "goliath_hide" //needs sprites
-	item_state = "goliath_hide" //needs sprites
-	singular_name = "dragon scale"
-	materials = list(MAT_DRAGON=MINERAL_MATERIAL_AMOUNT)
-
 /obj/item/twohanded/required/gibtonite
 	name = "gibtonite ore"
 	desc = "Extremely explosive if struck with mining equipment, Gibtonite is often used by miners to speed up their work by using it as a mining charge. This material is illegal to possess by unauthorized personnel under space law."
