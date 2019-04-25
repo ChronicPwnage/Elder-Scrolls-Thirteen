@@ -6,22 +6,22 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 /datum/preferences
 	var/client/parent
-	//doohickeys for savefiles
+	//variables for savefiles
 	var/path
-	var/default_slot = 1				//Holder so it doesn't default to slot 1, rather the last one used
-	var/max_save_slots = 3
+	var/default_slot = 1	//makes the file default to the last slot used
+	var/max_save_slots = 5  /*changed to five -bobalobdob*/
 
 	//non-preference stuff
-	var/muted = 0
-	var/last_ip
-	var/last_id
+	var/muted = 0   //gonna track down whoever wrote this if possible
+	var/last_ip		//so i can document what it actually means
+	var/last_id		//		-bobalobdob
 
 	//game-preferences
 	var/lastchangelog = ""				//Saved changelog filesize to detect if there was a change
-	var/ooccolor = "#c43b23"
+	var/ooccolor = "#c43b23"			//this is the defualt OOC color, a shade of red. -bob
 	var/asaycolor = "#ff4500"			//This won't change the color for current admins, only incoming ones.
-	var/enable_tips = TRUE
-	var/tip_delay = 500 //tip delay in milliseconds
+	var/enable_tips = TRUE				//defaults to true.
+	var/tip_delay = 500 				//tip delay in milliseconds -- how long it takes for tips to appear on hover
 
 	//Antag preferences
 	var/list/be_special = list()		//Special role selection
@@ -29,25 +29,25 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 										//If it's 0, that's good, if it's anything but 0, the owner of this prefs file's antag choices were,
 										//autocorrected this round, not that you'd need to check that.
 
-	var/UI_style = null
-	var/buttons_locked = FALSE
-	var/hotkeys = FALSE
-	var/tgui_fancy = TRUE
+	var/UI_style = null									//starts unset (???) -bob
+	var/buttons_locked = FALSE							//gonna find out which buttons -bob
+	var/hotkeys = FALSE									//WASD mode defaults OFF -bob
+	var/tgui_fancy = TRUE								//defaults to "fancy" ui -bob
 	var/tgui_lock = TRUE
 	var/windowflashing = TRUE
 	var/toggles = TOGGLES_DEFAULT
 	var/db_flags
 	var/chat_toggles = TOGGLES_DEFAULT_CHAT
-	var/ghost_form = "ghost"
-	var/ghost_orbit = GHOST_ORBIT_CIRCLE
-	var/ghost_accs = GHOST_ACCS_DEFAULT_OPTION
-	var/ghost_others = GHOST_OTHERS_DEFAULT_OPTION
-	var/ghost_hud = 1
-	var/inquisitive_ghost = 1
-	var/allow_midround_antag = 1
-	var/preferred_map = null
-	var/pda_style = MONO
-	var/pda_color = "#808000"
+	var/ghost_form = "ghost"							//ghost mob defaults to the standard translucent ghost -bob
+	var/ghost_orbit = GHOST_ORBIT_CIRCLE				// orbit shape defaults to circular -bob
+	var/ghost_accs = GHOST_ACCS_DEFAULT_OPTION			//self explanitory -bob
+	var/ghost_others = GHOST_OTHERS_DEFAULT_OPTION		//see above -bob
+	var/ghost_hud = 1									//bool to use ghost hud -bob
+	var/inquisitive_ghost = 1							//bool to examine on click, starts true -bob
+	var/allow_midround_antag = 1						//starts true -bob
+	var/preferred_map = null							//preferred map starts unset, must set it yourself -bob
+	var/pda_style = MONO								//PDA style defaults to Monospaced, will probably get rid of PDA code for TES13 -bob
+	var/pda_color = "#808000"							//an odd pea soupish color, makes the PDA body that color -bob
 
 	var/uses_glasses_colour = 0
 
@@ -68,11 +68,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/skin_tone = "caucasian1"		//Skin color
 	var/eye_color = "000"				//Eye color
 	var/datum/species/pref_species = new /datum/species/human()	//Mutant race
-	var/list/features = list("mcolor" = "FFF", "ethcolor" = "9c3030", "tail_lizard" = "Smooth", "tail_human" = "None", "snout" = "Round", "horns" = "None", "ears" = "None", "wings" = "None", "frills" = "None", "spines" = "None", "body_markings" = "None", "legs" = "Normal Legs", "moth_wings" = "Plain")
+	var/list/features = list("mcolor" = "FFF", "ethcolor" = "9c3030", "tail_lizard" = "Smooth", "horns" = "None", "ears" = "None", "frills" = "None", "body_markings" = "None", "legs" = "Normal Legs")
 
 	var/list/custom_names = list()
-	var/preferred_ai_core_display = "Blue"
-	var/prefered_security_department = SEC_DEPT_RANDOM
+	var/preferred_ai_core_display = "Blue"					//default AI display -bob
+	var/prefered_security_department = SEC_DEPT_RANDOM		//determines the department you guard when playing sec -bob
 
 	var/flavor_text = ""
 
@@ -141,7 +141,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	real_name = pref_species.random_name(gender,1)
 	if(!loaded_preferences_successfully)
 		save_preferences()
-	save_character()		//let's save this new random character so it doesn't keep generating new ones.
+	save_character()		//saves the random character
 	menuoptions = list()
 	return
 
