@@ -1176,10 +1176,16 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 
 				if("flavor_text")
-					var/msg = stripped_multiline_input(usr,"Set the flavor text in your 'examine' verb. This can also be used for OOC notes. \n Warning: pressing 'Cancel' will reset your flavor text.","Flavor Text",html_decode(features["flavor_text"]), MAX_MESSAGE_LEN*2, TRUE) as null|message
-					if(!isnull(msg))
+					to_chat(user, "<font color='red'>Debug: flavortext menu opened</font>")
+					var/oldtext = features["flavor_text"]
+					var/msg = stripped_multiline_input(usr,"Set the flavor text in your 'examine' verb. This can also be used for OOC notes. \n To delete flavor text, input a space and hit 'OK'.","Flavor Text",html_decode(features["flavor_text"]), MAX_MESSAGE_LEN*2, TRUE) as null|message
+					if(msg)
 						msg = copytext(msg, 1, MAX_MESSAGE_LEN*2)
+						to_chat(user, "<font color='red'>Debug: message NOT null</font>")
 						features["flavor_text"] = msg
+					else
+						to_chat(user, "<font color='red'>Debug: message null</font>")
+						features["flavor_text"] = oldtext
 
 				if("hair")
 					var/new_hair = input(user, "Choose your character's hair colour:", "Character Preference","#"+hair_color) as color|null
