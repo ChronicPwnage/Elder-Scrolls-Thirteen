@@ -1,3 +1,7 @@
+/*BOBALOBDOB IS GOING TO BE ""REFACTORING"" THIS TO FIT
+  OUR NEEDS.
+*/
+
 GLOBAL_LIST_EMPTY(preferences_datums)
 
 /datum/preferences
@@ -13,7 +17,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/last_id
 
 	//game-preferences
-	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
+	var/lastchangelog = ""				//Saved changelog filesize to detect if there was a change
 	var/ooccolor = "#c43b23"
 	var/asaycolor = "#ff4500"			//This won't change the color for current admins, only incoming ones.
 	var/enable_tips = TRUE
@@ -51,7 +55,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/real_name						//our character's name
 	var/be_random_name = 0				//whether we'll have a random name every round
 	var/be_random_body = 0				//whether we'll have a random body every round
-	var/gender = MALE					//gender of character (well duh)
+	var/gender = MALE/*MALE || FEMALE*/ //gender of character (well duh)
 	var/age = 30						//age of character
 	var/underwear = "Nude"				//underwear type
 	var/undershirt = "Nude"				//undershirt type
