@@ -1,0 +1,11 @@
+{
+    "map_name": "testmap",
+    "map_path": "map_files/debug",
+    "map_file": "testmap.dmm",
+    "shuttles": {
+	    "cargo": "cargo_box",
+	    "ferry": "ferry_fancy",
+	    "whiteship": "whiteship_box",
+	    "emergency": "emergency_box"
+    }
+}
