@@ -70,6 +70,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/preferred_ai_core_display = "Blue"
 	var/prefered_security_department = SEC_DEPT_RANDOM
 
+	var/flavor_text = ""
+
 		//Quirk list
 	var/list/positive_quirks = list()
 	var/list/negative_quirks = list()
@@ -217,6 +219,17 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 			dat += "</tr></table>"
 
+			update_preview_icon()
+			dat += "<table><tr><td width='340px' height='300px' valign='top'>"
+			dat += "<h2>Flavor Text</h2>"
+			dat += "<a href='?_src_=prefs;preference=flavor_text;task=input'><b>Set Examine Text</b></a><br>"
+			if(lentext(features["flavor_text"]) <= 40)
+				if(!lentext(features["flavor_text"]))
+					dat += "\[...\]"
+				else
+					dat += "[features["flavor_text"]]"
+			else
+				dat += "[TextPreview(features["flavor_text"])]...<BR>"
 			dat += "<h2>Body</h2>"
 			dat += "<a href='?_src_=prefs;preference=all;task=random'>Random Body</A> "
 			dat += "<a href='?_src_=prefs;preference=all'>Always Random Body: [be_random_body ? "Yes" : "No"]</A><br>"
@@ -1161,6 +1174,19 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(new_age)
 						age = max(min( round(text2num(new_age)), AGE_MAX),AGE_MIN)
 
+
+				if("flavor_text")
+					to_chat(user, "<font color='red'>Debug: flavortext menu opened</font>")
+					var/oldtext = features["flavor_text"]
+					var/msg = stripped_multiline_input(usr,"Set the flavor text in your 'examine' verb. This can also be used for OOC notes. \n To delete flavor text, input a space and hit 'OK'.","Flavor Text",html_decode(features["flavor_text"]), MAX_MESSAGE_LEN*2, TRUE) as null|message
+					if(msg)
+						msg = copytext(msg, 1, MAX_MESSAGE_LEN*2)
+						to_chat(user, "<font color='red'>Debug: message NOT null</font>")
+						features["flavor_text"] = msg
+					else
+						to_chat(user, "<font color='red'>Debug: message null</font>")
+						features["flavor_text"] = oldtext
+
 				if("hair")
 					var/new_hair = input(user, "Choose your character's hair colour:", "Character Preference","#"+hair_color) as color|null
 					if(new_hair)
@@ -1605,6 +1631,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	character.dna.features = features.Copy()
 	character.set_species(chosen_species, icon_update = FALSE, pref_load = TRUE)
 	character.dna.real_name = character.real_name
+
+	character.flavor_text = features["flavor_text"] //Let's update their flavor_text at least initially
 
 	if("tail_lizard" in pref_species.default_features)
 		character.dna.species.mutant_bodyparts |= "tail_lizard"

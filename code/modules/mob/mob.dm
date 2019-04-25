@@ -1,3 +1,56 @@
+//flavor text, courtesy of citadel
+
+/mob
+	var/flavor_text = "" //tired of fucking double checking this
+
+/mob/proc/update_flavor_text()
+	set src in usr
+	if(usr != src)
+		usr << "No."
+	var/msg = input(usr,"Set the flavor text in your 'examine' verb. Can also be used for OOC notes about your character.","Flavor Text",html_decode(flavor_text)) as message|null
+
+	if(msg != null)
+		msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+		msg = html_encode(msg)
+
+		flavor_text = msg
+
+/mob/proc/warn_flavor_changed()
+	if(flavor_text && flavor_text != "") // don't spam people that don't use it!
+		src << "<h2 class='alert'>OOC Warning:</h2>"
+		src << "<span class='alert'>Your flavor text is likely out of date! <a href='?src=[REF(src)];flavor_change=1'>Change</a></span>"
+
+/mob/proc/print_flavor_text()
+	if(flavor_text && flavor_text != "")
+		var/msg = replacetext(flavor_text, "\n", " ")
+		if(lentext(msg) <= 40)
+			return "<span class='notice'>[msg]</span>"
+		else
+			return "<span class='notice'>[copytext(msg, 1, 37)]... <a href='?src=[REF(src)];flavor_more=1'>More...</span></a>"
+
+/mob/proc/get_top_level_mob()
+	if(istype(src.loc,/mob)&&src.loc!=src)
+		var/mob/M=src.loc
+		return M.get_top_level_mob()
+	return src
+
+proc/get_top_level_mob(var/mob/S)
+	if(istype(S.loc,/mob)&&S.loc!=S)
+		var/mob/M=S.loc
+		return M.get_top_level_mob()
+	return S
+
+proc/TextPreview(var/string,var/len=40)
+	if(lentext(string) <= len)
+		if(!lentext(string))
+			return "\[...\]"
+		else
+			return string
+	else
+		return "[copytext(string, 1, 37)]..."
+
+//flavortext ends here
+
 /mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
 	GLOB.mob_list -= src
 	GLOB.dead_mob_list -= src
@@ -470,10 +523,16 @@
 		unset_machine()
 		src << browse(null, t1)
 
+	if(href_list["flavor_more"])
+		usr << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", name, replacetext(flavor_text, "\n", "<BR>")), text("window=[];size=500x200", name))
+		onclose(usr, "[name]")
+
+	if(href_list["flavor_change"])
+		update_flavor_text()
+
 	if(href_list["refresh"])
 		if(machine && in_range(src, usr))
 			show_inv(machine)
-
 
 	if(href_list["item"] && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERY))
 		var/slot = text2num(href_list["item"])
