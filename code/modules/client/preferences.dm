@@ -52,21 +52,21 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/uses_glasses_colour = 0
 
 	//character preferences
-	var/real_name						//our character's name
-	var/be_random_name = 0				//whether we'll have a random name every round
-	var/be_random_body = 0				//whether we'll have a random body every round
-	var/gender = MALE/*MALE || FEMALE*/ //gender of character (well duh)
-	var/age = 30						//age of character
-	var/underwear = "Nude"				//underwear type
-	var/undershirt = "Nude"				//undershirt type
-	var/socks = "Nude"					//socks type
-	var/backbag = DBACKPACK				//backpack type
-	var/hair_style = "Bald"				//Hair type
-	var/hair_color = "000"				//Hair color
-	var/facial_hair_style = "Shaved"	//Face hair type
-	var/facial_hair_color = "000"		//Facial hair color
-	var/skin_tone = "caucasian1"		//Skin color
-	var/eye_color = "000"				//Eye color
+	var/real_name								//our character's name
+	var/be_random_name = 0						//whether we'll have a random name every round
+	var/be_random_body = 0						//whether we'll have a random body every round
+	var/gender = MALE/*MALE/FEMALE/AGENDER*/ 	//gender of character (well duh)
+	var/age = 30								//age of character
+	var/underwear = "Nude"						//underwear type
+	var/undershirt = "Nude"						//undershirt type
+	var/socks = "Nude"							//socks type
+	var/backbag = DBACKPACK						//backpack type
+	var/hair_style = "Bald"						//Hair type
+	var/hair_color = "000"						//Hair color
+	var/facial_hair_style = "Shaved"			//Face hair type
+	var/facial_hair_color = "000"				//Facial hair color
+	var/skin_tone = "caucasian1"				//Skin color
+	var/eye_color = "000"						//Eye color
 	var/datum/species/pref_species = new /datum/species/human()	//Mutant race
 	var/list/features = list("mcolor" = "FFF", "ethcolor" = "9c3030", "tail_lizard" = "Smooth", "horns" = "None", "ears" = "None", "frills" = "None", "body_markings" = "None", "legs" = "Normal Legs")
 
@@ -96,12 +96,12 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/job_engsec_low = 0
 
 		// Want randomjob if preferences already filled - Donkie
-	var/joblessrole = BERANDOMJOB  //defaults to 1 for fewer assistants
+	var/joblessrole = BERANDOMJOB  //defaults to 1 for fewer assistants (actually defaults to 2 lol -bob)
 
 	// 0 = character settings, 1 = game preferences
-	var/current_tab = 0
+	var/current_tab = 0		//which means it starts on the value of current_tab -bob
 
-	var/unlock_content = 0
+	var/unlock_content = 0	//time unlocks? -bob
 
 	var/list/ignoring = list()
 
