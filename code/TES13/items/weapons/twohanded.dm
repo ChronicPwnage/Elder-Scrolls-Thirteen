@@ -13,6 +13,7 @@
 	slot_flags = ITEM_SLOT_BACK
 	force_unwielded = 10
 	force_wielded = 60
+	attack_verb = list("attacked", "stabbed", "struck", "impaled")
 
 /obj/item/twohanded/fireaxe/spear/steel
 	icon_state = "fireaxe0"
@@ -118,6 +119,7 @@
 	force_wielded = 40
 	armour_penetration = 45
 	sharpness = IS_BLUNT
+	attack_verb = list("bashed", "bludgeoned", "hit", "struck", "beat")
 
 /obj/item/twohanded/fireaxe/warham/steel
 	icon_state = "fireaxe0"
