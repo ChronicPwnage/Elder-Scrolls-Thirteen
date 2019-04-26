@@ -1,23 +1,27 @@
+/*BOBALOBDOB IS GOING TO BE ""REFACTORING"" THIS TO FIT
+  OUR NEEDS.
+*/
+
 GLOBAL_LIST_EMPTY(preferences_datums)
 
 /datum/preferences
 	var/client/parent
-	//doohickeys for savefiles
+	//variables for savefiles
 	var/path
-	var/default_slot = 1				//Holder so it doesn't default to slot 1, rather the last one used
-	var/max_save_slots = 3
+	var/default_slot = 1	//makes the file default to the last slot used
+	var/max_save_slots = 5  /*changed to five -bobalobdob*/
 
 	//non-preference stuff
-	var/muted = 0
-	var/last_ip
-	var/last_id
+	var/muted = 0   //gonna track down whoever wrote this if possible
+	var/last_ip		//so i can document what it actually means
+	var/last_id		//		-bobalobdob
 
 	//game-preferences
-	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
-	var/ooccolor = "#c43b23"
+	var/lastchangelog = ""				//Saved changelog filesize to detect if there was a change
+	var/ooccolor = "#c43b23"			//this is the defualt OOC color, a shade of red. -bob
 	var/asaycolor = "#ff4500"			//This won't change the color for current admins, only incoming ones.
-	var/enable_tips = TRUE
-	var/tip_delay = 500 //tip delay in milliseconds
+	var/enable_tips = TRUE				//defaults to true.
+	var/tip_delay = 500 				//tip delay in milliseconds -- how long it takes for tips to appear on hover
 
 	//Antag preferences
 	var/list/be_special = list()		//Special role selection
@@ -25,50 +29,52 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 										//If it's 0, that's good, if it's anything but 0, the owner of this prefs file's antag choices were,
 										//autocorrected this round, not that you'd need to check that.
 
-	var/UI_style = null
-	var/buttons_locked = FALSE
-	var/hotkeys = FALSE
-	var/tgui_fancy = TRUE
+	var/UI_style = null									//starts unset (???) -bob
+	var/buttons_locked = FALSE							//gonna find out which buttons -bob
+	var/hotkeys = FALSE									//WASD mode defaults OFF -bob
+	var/tgui_fancy = TRUE								//defaults to "fancy" ui -bob
 	var/tgui_lock = TRUE
 	var/windowflashing = TRUE
 	var/toggles = TOGGLES_DEFAULT
 	var/db_flags
 	var/chat_toggles = TOGGLES_DEFAULT_CHAT
-	var/ghost_form = "ghost"
-	var/ghost_orbit = GHOST_ORBIT_CIRCLE
-	var/ghost_accs = GHOST_ACCS_DEFAULT_OPTION
-	var/ghost_others = GHOST_OTHERS_DEFAULT_OPTION
-	var/ghost_hud = 1
-	var/inquisitive_ghost = 1
-	var/allow_midround_antag = 1
-	var/preferred_map = null
-	var/pda_style = MONO
-	var/pda_color = "#808000"
+	var/ghost_form = "ghost"							//ghost mob defaults to the standard translucent ghost -bob
+	var/ghost_orbit = GHOST_ORBIT_CIRCLE				// orbit shape defaults to circular -bob
+	var/ghost_accs = GHOST_ACCS_DEFAULT_OPTION			//self explanitory -bob
+	var/ghost_others = GHOST_OTHERS_DEFAULT_OPTION		//see above -bob
+	var/ghost_hud = 1									//bool to use ghost hud -bob
+	var/inquisitive_ghost = 1							//bool to examine on click, starts true -bob
+	var/allow_midround_antag = 1						//starts true -bob
+	var/preferred_map = null							//preferred map starts unset, must set it yourself -bob
+	var/pda_style = MONO								//PDA style defaults to Monospaced, will probably get rid of PDA code for TES13 -bob
+	var/pda_color = "#808000"							//an odd pea soupish color, makes the PDA body that color -bob
 
 	var/uses_glasses_colour = 0
 
 	//character preferences
-	var/real_name						//our character's name
-	var/be_random_name = 0				//whether we'll have a random name every round
-	var/be_random_body = 0				//whether we'll have a random body every round
-	var/gender = MALE					//gender of character (well duh)
-	var/age = 30						//age of character
-	var/underwear = "Nude"				//underwear type
-	var/undershirt = "Nude"				//undershirt type
-	var/socks = "Nude"					//socks type
-	var/backbag = DBACKPACK				//backpack type
-	var/hair_style = "Bald"				//Hair type
-	var/hair_color = "000"				//Hair color
-	var/facial_hair_style = "Shaved"	//Face hair type
-	var/facial_hair_color = "000"		//Facial hair color
-	var/skin_tone = "caucasian1"		//Skin color
-	var/eye_color = "000"				//Eye color
+	var/real_name								//our character's name
+	var/be_random_name = 0						//whether we'll have a random name every round
+	var/be_random_body = 0						//whether we'll have a random body every round
+	var/gender = MALE/*MALE/FEMALE/AGENDER*/ 	//gender of character (well duh)
+	var/age = 30								//age of character
+	var/underwear = "Nude"						//underwear type
+	var/undershirt = "Nude"						//undershirt type
+	var/socks = "Nude"							//socks type
+	var/backbag = DBACKPACK						//backpack type
+	var/hair_style = "Bald"						//Hair type
+	var/hair_color = "000"						//Hair color
+	var/facial_hair_style = "Shaved"			//Face hair type
+	var/facial_hair_color = "000"				//Facial hair color
+	var/skin_tone = "caucasian1"				//Skin color
+	var/eye_color = "000"						//Eye color
 	var/datum/species/pref_species = new /datum/species/human()	//Mutant race
-	var/list/features = list("mcolor" = "FFF", "ethcolor" = "9c3030", "tail_lizard" = "Smooth", "tail_human" = "None", "snout" = "Round", "horns" = "None", "ears" = "None", "wings" = "None", "frills" = "None", "spines" = "None", "body_markings" = "None", "legs" = "Normal Legs", "moth_wings" = "Plain")
+	var/list/features = list("mcolor" = "FFF", "ethcolor" = "9c3030", "tail_lizard" = "Smooth", "horns" = "None", "ears" = "None", "frills" = "None", "body_markings" = "None", "legs" = "Normal Legs")
 
 	var/list/custom_names = list()
-	var/preferred_ai_core_display = "Blue"
-	var/prefered_security_department = SEC_DEPT_RANDOM
+	var/preferred_ai_core_display = "Blue"					//default AI display -bob
+	var/prefered_security_department = SEC_DEPT_RANDOM		//determines the department you guard when playing sec -bob
+
+	var/flavor_text = ""
 
 		//Quirk list
 	var/list/positive_quirks = list()
@@ -90,12 +96,12 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/job_engsec_low = 0
 
 		// Want randomjob if preferences already filled - Donkie
-	var/joblessrole = BERANDOMJOB  //defaults to 1 for fewer assistants
+	var/joblessrole = BERANDOMJOB  //defaults to 1 for fewer assistants (actually defaults to 2 lol -bob)
 
 	// 0 = character settings, 1 = game preferences
-	var/current_tab = 0
+	var/current_tab = 0		//which means it starts on the value of current_tab -bob
 
-	var/unlock_content = 0
+	var/unlock_content = 0	//time unlocks? -bob
 
 	var/list/ignoring = list()
 
@@ -135,7 +141,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	real_name = pref_species.random_name(gender,1)
 	if(!loaded_preferences_successfully)
 		save_preferences()
-	save_character()		//let's save this new random character so it doesn't keep generating new ones.
+	save_character()		//saves the random character
 	menuoptions = list()
 	return
 
@@ -196,7 +202,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "<a href='?_src_=prefs;preference=name;task=input'>[real_name]</a><BR>"
 
 			if(!(AGENDER in pref_species.species_traits))
-				dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'>[gender == MALE ? "Male" : "Female"]</a><BR>"
+				dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'>[gender == MALE ? "Male" : (gender == FEMALE ? "Female" : (gender == PLURAL ? "Nonbinary" : "Object"))]</a><BR>"
 			dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'>[age]</a><BR>"
 
 			dat += "<b>Special Names:</b><BR>"
@@ -217,6 +223,17 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 			dat += "</tr></table>"
 
+			update_preview_icon()
+			dat += "<table><tr><td width='340px' height='300px' valign='top'>"
+			dat += "<h2>Flavor Text</h2>"
+			dat += "<a href='?_src_=prefs;preference=flavor_text;task=input'><b>Set Examine Text</b></a><br>"
+			if(lentext(features["flavor_text"]) <= 40)
+				if(!lentext(features["flavor_text"]))
+					dat += "\[...\]"
+				else
+					dat += "[features["flavor_text"]]"
+			else
+				dat += "[TextPreview(features["flavor_text"])]...<BR>"
 			dat += "<h2>Body</h2>"
 			dat += "<a href='?_src_=prefs;preference=all;task=random'>Random Body</A> "
 			dat += "<a href='?_src_=prefs;preference=all'>Always Random Body: [be_random_body ? "Yes" : "No"]</A><br>"
@@ -1161,6 +1178,19 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(new_age)
 						age = max(min( round(text2num(new_age)), AGE_MAX),AGE_MIN)
 
+
+				if("flavor_text")
+					to_chat(user, "<font color='red'>Debug: flavortext menu opened</font>")
+					var/oldtext = features["flavor_text"]
+					var/msg = stripped_multiline_input(usr,"Set the flavor text in your 'examine' verb. This can also be used for OOC notes. \n To delete flavor text, input a space and hit 'OK'.","Flavor Text",html_decode(features["flavor_text"]), MAX_MESSAGE_LEN*2, TRUE) as null|message
+					if(msg)
+						msg = copytext(msg, 1, MAX_MESSAGE_LEN*2)
+						to_chat(user, "<font color='red'>Debug: message NOT null</font>")
+						features["flavor_text"] = msg
+					else
+						to_chat(user, "<font color='red'>Debug: message null</font>")
+						features["flavor_text"] = oldtext
+
 				if("hair")
 					var/new_hair = input(user, "Choose your character's hair colour:", "Character Preference","#"+hair_color) as color|null
 					if(new_hair)
@@ -1414,13 +1444,13 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(unlock_content)
 						toggles ^= MEMBER_PUBLIC
 				if("gender")
-					if(gender == MALE)
-						gender = FEMALE
-					else
-						gender = MALE
-					underwear = random_underwear(gender)
-					undershirt = random_undershirt(gender)
-					socks = random_socks()
+					var/chosengender = input(user, "Select your character's gender.", "Gender Selection", gender) in list(MALE,FEMALE,"nonbinary","object")
+					switch(chosengender)
+						if("nonbinary")
+							chosengender = PLURAL
+						if("object")
+							chosengender = NEUTER
+					gender = chosengender
 					facial_hair_style = random_facial_hair_style(gender)
 					hair_style = random_hair_style(gender)
 
@@ -1605,6 +1635,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	character.dna.features = features.Copy()
 	character.set_species(chosen_species, icon_update = FALSE, pref_load = TRUE)
 	character.dna.real_name = character.real_name
+
+	character.flavor_text = features["flavor_text"] //Let's update their flavor_text at least initially
 
 	if("tail_lizard" in pref_species.default_features)
 		character.dna.species.mutant_bodyparts |= "tail_lizard"

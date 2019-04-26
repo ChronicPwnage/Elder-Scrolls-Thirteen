@@ -1,0 +1,82 @@
+"a" = (/turf/closed/wall/mineral/iron,/area/space)
+"b" = (/turf/closed/wall/mineral/titanium,/area/space)
+"c" = (/turf/open/floor/plasteel/stairs/left,/area/space)
+"d" = (/turf/open/floor/plasteel/stairs/medium,/area/space)
+"e" = (/turf/open/floor/plasteel/stairs/right,/area/space)
+"f" = (/turf/open/floor/wood,/area/centcom)
+"g" = (/turf/open/floor/carpet,/area/centcom)
+"h" = (/obj/structure/chair/bronze,/turf/open/floor/carpet,/area/centcom)
+"i" = (/obj/structure/bonfire/prelit,/turf/open/floor/carpet,/area/centcom)
+"j" = (/obj/effect/landmark/start,/obj/effect/light_emitter/tendril,/turf/open/floor/carpet,/area/centcom)
+"k" = (/obj/item/clothing/head/helmet/light/leather/whiteguard,/turf/open/floor/carpet,/area/centcom)
+"l" = (/obj/item/clothing/head/helmet/light,/turf/open/floor/carpet,/area/centcom)
+"m" = (/obj/item/gun/bow,/turf/open/floor/carpet,/area/centcom)
+"n" = (/obj/effect/landmark/latejoin,/turf/open/floor/carpet,/area/centcom)
+"o" = (/obj/item/clothing/suit/armor/light/leather/whiteguard,/turf/open/floor/carpet,/area/centcom)
+"p" = (/obj/item/gun/bow/crossbow,/turf/open/floor/wood,/area/centcom)
+"q" = (/obj/item/clothing/shoes/combat/light/leather/whiteguard,/turf/open/floor/carpet,/area/centcom)
+"r" = (/obj/item/claymore/mace,/turf/open/floor/carpet,/area/centcom)
+"s" = (/obj/structure/table/wood,/turf/open/floor/carpet,/area/centcom)
+"t" = (/obj/structure/table/wood,/obj/effect/spawner/lootdrop/three_course_meal,/turf/open/floor/carpet,/area/centcom)
+"u" = (/turf/open/floor/plasteel/rockvault/sandstone,/area/centcom)
+"v" = (/obj/structure/bonfire/prelit,/turf/open/floor/plasteel/rockvault/sandstone,/area/centcom)
+"w" = (/obj/structure/table/wood,/obj/item/reagent_containers/food/snacks/khinkali,/turf/open/floor/carpet,/area/centcom)
+"x" = (/turf/closed/wall/mineral/iron,/area/centcom)
+"y" = (/obj/structure/chair/wood/normal{dir = 4},/turf/open/floor/carpet,/area/centcom)
+"z" = (/obj/structure/table/wood,/obj/item/reagent_containers/food/drinks/drinkingglass,/obj/item/reagent_containers/food/snacks/meat/steak/bear,/turf/open/floor/carpet,/area/centcom)
+"A" = (/obj/structure/chair/wood/normal{dir = 8},/turf/open/floor/carpet,/area/centcom)
+"B" = (/obj/structure/bonfire/prelit,/obj/effect/light_emitter/tendril,/turf/open/floor/plasteel/rockvault/sandstone,/area/centcom)
+"C" = (/obj/effect/light_emitter/tendril,/turf/open/floor/wood,/area/centcom)
+"D" = (/turf/open/floor/plasteel/stairs/left,/area/centcom)
+"E" = (/turf/open/floor/plasteel/stairs/medium,/area/centcom)
+"F" = (/turf/open/floor/plasteel/stairs/right,/area/centcom)
+"G" = (/obj/item/kitchen/knife/dagger,/turf/open/floor/carpet,/area/centcom)
+
+(1,1,1) = {"
+aaaaabbbaaaaaaaaabbbaaaaa
+aaaaacdeaaaaaaaaacdeaaaaa
+aaaaacdeaaaaaaaaacdeaaaaa
+aaafffffaaaaaaaaafffffaaa
+aaafffffaaaghgaaafffffaaa
+aaafffffgigggggigfffffaaa
+aaaffffffgggjklmffffffaaa
+aaafffffffggnoGpffffffaaa
+aaaffffffggghqgrffffffaaa
+aaaffffffgsstssgffffffaaa
+aaaffffffgsuuusgffffffaaa
+aaaffffffgsuvusgffffffaaa
+aaaffffffgwuvuwgffffffaaa
+aaxffffffyzuvuzAffffffaaa
+aaafffffxgsuBusgxfffffaaa
+aaaffffffgsuvusgffffffaaa
+aaaffffffgsuvusgffffffaaa
+aaaffffffgwuvuwgffffffaaa
+aaaffffffyzuvuzAffffffaaa
+aaaffffffgsuvusgffffffaaa
+aaaffffffgsuvusgffffffaaa
+aaaffffffgsuvusgffffffaaa
+aaaffffffgwuvuwgffffffxaa
+aaafffffxyzuBuzAxfffffxaa
+aaaffffffgsuvusgffffffaaa
+aaaffffffgsuvusgffffffaaa
+aaxffffffgsuvusgffffffaaa
+aaxffffffgwuvuwgffffffaaa
+aaxffffffyzuuuzAffffffaaa
+aaxffffffgsssssgffffffaaa
+aaaffffffgggggggffffffaaa
+aaafffffffffffffffffffaaa
+aaafffffxfffCfffxfffffaaa
+aaafffffffffffffffffffaaa
+aaafffffffffffffffffffaaa
+aaafffffffffffffffffffaaa
+xxxfffffffffffffffffffaaa
+xxxfffffffffffffffffffaaa
+aaafffffxfffffffxfffffaaa
+aaafffffffffCfffffffffaaa
+aaafffffffffffffffffffaaa
+aaafffffffffffffffffffaaa
+aaafffffffDEEEFfffffffaaa
+aaafffffffDEEEFfffffffaaa
+aaafffffffDEEEFfffffffaaa
+aaaaaaaaaabbbbbaaxxxaxaaa
+"}

@@ -436,3 +436,14 @@
 	else
 		client.screen -= hud_used.hotkeybuttons
 		hud_used.hotkey_ui_hidden = TRUE
+
+//Flavor Text
+/mob/living/carbon/human/verb/set_flavor()
+	set name = "Set Flavor Text"
+	set desc = "Sets an extended description of your character's features."
+	set category = "IC"
+
+	var/new_flavor = input(src, "Enter your new flavor text:", "Flavor text", null) as message|null
+	if(!isnull(new_flavor))
+		flavor_text = sanitize(new_flavor)
+		to_chat(src, "Your flavor text has been updated.")
