@@ -1,58 +1,58 @@
-//TES13 twohanded weapons- greatswords, battleaxes and warhammers
+//TES13 twohanded weapons- spears, battleaxes, and warhammers
 //based on fireaxe code in twohanded.dm
 
-/obj/item/twohanded/fireaxe/gsword
+/obj/item/twohanded/fireaxe/spear
 	icon_state = "fireaxe0"
 	lefthand_file = 'icons/mob/inhands/weapons/axes_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/axes_righthand.dmi'
-	name = "iron greatsword"
-	desc = "A heavy and simple iron greatsword."
+	name = "iron spear"
+	desc = "A heavy and simple iron spear."
 	force = 10
-	throwforce = 15
+	throwforce = 25
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
 	force_unwielded = 10
 	force_wielded = 60
 
-/obj/item/twohanded/fireaxe/gsword/steel
+/obj/item/twohanded/fireaxe/spear/steel
 	icon_state = "fireaxe0"
 	lefthand_file = 'icons/mob/inhands/weapons/axes_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/axes_righthand.dmi'
-	name = "steel greatsword"
-	desc = "A well forged steel greatsword."
+	name = "steel spear"
+	desc = "A well forged steel spear."
 	force = 10
-	throwforce = 15
+	throwforce = 25
 	force_unwielded = 10
 	force_wielded = 65
 
-/obj/item/twohanded/fireaxe/gsword/orcish
+/obj/item/twohanded/fireaxe/spear/orcish
 	icon_state = "fireaxe0"
 	lefthand_file = 'icons/mob/inhands/weapons/axes_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/axes_righthand.dmi'
-	name = "orcish greatsword"
-	desc = "A threatening and incredibly deadly Orcish greatsword."
+	name = "orcish spear"
+	desc = "A threatening and incredibly deadly Orcish spear."
 	force = 10
-	throwforce = 15
+	throwforce = 30
 	force_unwielded = 10
 	force_wielded = 70
 
-/obj/item/twohanded/fireaxe/gsword/dwarven
+/obj/item/twohanded/fireaxe/spear/dwarven
 	icon_state = "fireaxe0"
 	lefthand_file = 'icons/mob/inhands/weapons/axes_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/axes_righthand.dmi'
-	name = "dwarven greatsword"
-	desc = "A bulky and strong greatsword fashioned from Dwarven metal."
+	name = "dwarven spear"
+	desc = "A bulky and strong spear fashioned from Dwarven metal."
 	force = 15
-	throwforce = 15
+	throwforce = 30
 	force_unwielded = 15
 	force_wielded = 75
 
-/obj/item/twohanded/fireaxe/gsword/steel/imperial
+/obj/item/twohanded/fireaxe/spear/steel/imperial
 	icon_state = "fireaxe0"
 	lefthand_file = 'icons/mob/inhands/weapons/axes_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/axes_righthand.dmi'
-	name = "imperial greatsword"
-	desc = "A sturdy Imperial greatsword, standard issue for Imperial Knights."
+	name = "imperial spear"
+	desc = "A sturdy Imperial spear, standard issue for Imperial Knights."
 
 /obj/item/twohanded/fireaxe/baxe
 	icon_state = "fireaxe0"
