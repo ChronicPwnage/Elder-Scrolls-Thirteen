@@ -109,9 +109,9 @@
 	category = CAT_SMITH
 	subcategory = CAT_IRON
 
-/datum/crafting_recipe/irongsword
-	name = "Iron greatsword"
-	result = /obj/item/twohanded/fireaxe/gsword
+/datum/crafting_recipe/ironspear
+	name = "Iron spear"
+	result = /obj/item/twohanded/fireaxe/spear
 	time = 30
 	reqs = list(/obj/item/stack/sheet/mineral/TES/iron = 5,
 				/obj/item/stack/sheet/mineral/TES/leather = 3)
