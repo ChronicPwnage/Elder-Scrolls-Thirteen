@@ -73,8 +73,8 @@
 	desc = "An iron mace, a good beginner's bludgeon."
 	icon_state = "iron_mace"
 	item_state = "iron_mace"
-	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
+	lefthand_file = 'icons/mob/inhands/weapons/melee_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/weapons/melee_righthand.dmi'
 	hitsound = 'sound/weapons/chainhit.ogg'
 	slot_flags = ITEM_SLOT_BELT
 	force = 20
@@ -129,10 +129,10 @@
 	name = "iron waraxe"
 	desc = "An iron axe made for war."
 	icon = 'icons/obj/items_and_weapons.dmi'
-	icon_state = "hatchet"
-	item_state = "hatchet"
-	lefthand_file = 'icons/mob/inhands/equipment/hydroponics_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/equipment/hydroponics_righthand.dmi'
+	icon_state = "iron_axe"
+	item_state = "iron_axe"
+	lefthand_file = 'icons/mob/inhands/weapons/axes_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/weapons/axes_righthand.dmi'
 	force = 25
 	armour_penetration = 15
 	w_class = WEIGHT_CLASS_NORMAL
