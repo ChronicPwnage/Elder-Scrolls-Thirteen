@@ -67,7 +67,7 @@
 	slot_flags = ITEM_SLOT_BACK
 	force_unwielded = 10
 	force_wielded = 50
-	armour_penetration = 30
+	armour_penetration = 25
 
 /obj/item/twohanded/fireaxe/baxe/steel
 	icon_state = "fireaxe0"
@@ -79,7 +79,7 @@
 	throwforce = 20
 	force_unwielded = 10
 	force_wielded = 55
-	armour_penetration = 35
+	armour_penetration = 30
 
 /obj/item/twohanded/fireaxe/baxe/orcish
 	icon_state = "fireaxe0"
@@ -91,7 +91,7 @@
 	throwforce = 25
 	force_unwielded = 10
 	force_wielded = 60
-	armour_penetration = 40
+	armour_penetration = 35
 
 /obj/item/twohanded/fireaxe/baxe/dwarven
 	icon_state = "fireaxe0"
@@ -103,7 +103,7 @@
 	throwforce = 25
 	force_unwielded = 15
 	force_wielded = 65
-	armour_penetration = 45
+	armour_penetration = 40
 
 /obj/item/twohanded/fireaxe/warham
 	icon_state = "fireaxe0"
@@ -117,7 +117,7 @@
 	slot_flags = ITEM_SLOT_BACK
 	force_unwielded = 10
 	force_wielded = 40
-	armour_penetration = 45
+	armour_penetration = 35
 	sharpness = IS_BLUNT
 	attack_verb = list("bashed", "bludgeoned", "hit", "struck", "beat")
 
@@ -131,7 +131,7 @@
 	throwforce = 5
 	force_unwielded = 15
 	force_wielded = 45
-	armour_penetration = 50
+	armour_penetration = 40
 
 
 /obj/item/twohanded/fireaxe/warham/orcish
@@ -144,7 +144,7 @@
 	throwforce = 10
 	force_unwielded = 15
 	force_wielded = 50
-	armour_penetration = 55
+	armour_penetration = 45
 
 /obj/item/twohanded/fireaxe/warham/dwarven
 	icon_state = "fireaxe0"
@@ -156,4 +156,4 @@
 	throwforce = 10
 	force_unwielded = 15
 	force_wielded = 55
-	armour_penetration = 60
+	armour_penetration = 50

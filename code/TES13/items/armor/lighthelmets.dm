@@ -45,21 +45,21 @@
 /obj/item/clothing/head/helmet/light/leather/stormcloak
 	name = "stormcloak helmet"
 	desc = "A standard Stormcloak helmet made mostly from leather."
-	icon_state = "helmet"
-	item_state = "helmet"
+	icon_state = "stormcloak"
+	item_state = "stormcloak"
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 
 /obj/item/clothing/head/helmet/light/leather/stormcloak/reinforced
 	name = "reinforced stormcloak helmet"
 	desc = "Stormcloak helmet reinforced with extra metal and some more leather padding."
-	icon_state = "helmet"
-	item_state = "helmet"
+	icon_state = "stormcloak"
+	item_state = "stormcloak"
 	armor = list("melee" = 35, "bullet" = 35, "laser" = 0, "energy" = 40, "bomb" = 35, "bio" = 0, "rad" = 0, "fire" = 35, "acid" = 0)
 
 /obj/item/clothing/head/helmet/light/leather/stormcloak/officer
-	name = "stormcloak helmet"
-	desc = "A standard Stormcloak helmet, made mostly from leather."
+	name = "stormcloak officer helmet"
+	desc = "A Stormcloak officer's helmet, made from lots of leather and various animal hides."
 	icon_state = "helmet"
 	item_state = "helmet"
 	flags_cover = HEADCOVERSEYES
