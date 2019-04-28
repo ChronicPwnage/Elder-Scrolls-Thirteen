@@ -45,6 +45,36 @@
 	admin_ticket_log(M, msg)
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Subtle Message") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/client/proc/cmd_admin_daedric_message(mob/M in GLOB.mob_list)
+	set category = "Special Verbs"
+	set name = "Daedric Message"
+
+	if(!ismob(M))
+		return
+	if(!check_rights(R_ADMIN))
+		return
+
+	message_admins("[key_name_admin(src)] has started mimicing the call of a Daedra to [ADMIN_LOOKUPFLW(M)].")
+	var/msg = input("Message:", text("Daedric PM to [M.key]")) as text|null
+	var/daedra = input("Who calls upon this mortal? No entry = blank.", text("Daedric PM to [M.key]")) as text|null
+
+	if(!msg)
+		message_admins("[key_name_admin(src)] decided not to finish their call to [ADMIN_LOOKUPFLW(M)]")
+		return
+	if(usr)
+		if (usr.client)
+			if(usr.client.holder)
+				if(daedra)
+					to_chat(M, "<i>You hear a voice calling to you from the realms of Oblivion- it sounds like [daedra]... <b>[msg]</i></b>")
+				else
+					to_chat(M, "<i>You hear a voice calling to you from the realms of Oblivion... <b>[msg]</i></b>")
+
+	log_admin("DaedricPM: [key_name(usr)] -> [key_name(M)] : [msg]")
+	msg = "<span class='adminnotice'><b> Daedric Message: [key_name_admin(usr)] -> [key_name_admin(M)] :</b> [msg]</span>"
+	message_admins(msg)
+	admin_ticket_log(M, msg)
+	SSblackbox.record_feedback("tally", "admin_verb", 1, "Daedric Message")
+
 /client/proc/cmd_admin_headset_message(mob/M in GLOB.mob_list)
 	set category = "Special Verbs"
 	set name = "Headset Message"

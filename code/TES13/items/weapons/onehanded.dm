@@ -78,7 +78,7 @@
 	hitsound = 'sound/weapons/chainhit.ogg'
 	slot_flags = ITEM_SLOT_BELT
 	force = 20
-	armour_penetration = 30
+	armour_penetration = 25
 	throwforce = 10
 	attack_verb = list("bashed", "bludgeoned", "hit", "struck", "beat")
 	block_chance = 0
@@ -92,7 +92,7 @@
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
 	force = 25
-	armour_penetration = 35
+	armour_penetration = 30
 	throwforce = 10
 
 /obj/item/claymore/mace/orcish
@@ -103,7 +103,7 @@
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
 	force = 30
-	armour_penetration = 40
+	armour_penetration = 35
 	throwforce = 15
 
 /obj/item/claymore/mace/dwarven
@@ -114,7 +114,7 @@
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
 	force = 35
-	armour_penetration = 45
+	armour_penetration = 40
 	throwforce = 15
 
 /obj/item/claymore/mace/steel/imperial
@@ -134,7 +134,7 @@
 	lefthand_file = 'icons/mob/inhands/weapons/axes_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/axes_righthand.dmi'
 	force = 25
-	armour_penetration = 15
+	armour_penetration = 10
 	w_class = WEIGHT_CLASS_NORMAL
 	throwforce = 30
 	throw_speed = 3
@@ -149,7 +149,7 @@
 	lefthand_file = 'icons/mob/inhands/equipment/hydroponics_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/hydroponics_righthand.dmi'
 	force = 30
-	armour_penetration = 20
+	armour_penetration = 15
 	throwforce = 35
 
 /obj/item/hatchet/waraxe/orcish
@@ -161,7 +161,7 @@
 	lefthand_file = 'icons/mob/inhands/equipment/hydroponics_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/hydroponics_righthand.dmi'
 	force = 35
-	armour_penetration = 25
+	armour_penetration = 20
 	throwforce = 40
 
 /obj/item/hatchet/waraxe/dwarven
@@ -173,5 +173,5 @@
 	lefthand_file = 'icons/mob/inhands/equipment/hydroponics_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/hydroponics_righthand.dmi'
 	force = 40
-	armour_penetration = 30
+	armour_penetration = 25
 	throwforce = 45

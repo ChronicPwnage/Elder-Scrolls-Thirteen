@@ -41,17 +41,17 @@
 	item_state = "armoralt"
 	armor = list("melee" = 35, "bullet" = 35, "laser" = 0, "energy" = 40, "bomb" = 35, "bio" = 0, "rad" = 0, "fire" = 35, "acid" = 0)
 
-/obj/item/clothing/suit/armor/leather/stormcloak
+/obj/item/clothing/suit/armor/light/leather/stormcloak
 	name = "stormcloak armor"
 	desc = "Standard Stormcloak armor, made primarily using leather."
-	icon_state = "armoralt"
-	item_state = "armoralt"
+	icon_state = "stormcloak"
+	item_state = "stormcloak"
 
 /obj/item/clothing/suit/armor/light/leather/stormcloak/reinforced
 	name = "reinforced stormcloak armor"
 	desc = "Stormcloak armor reinforced with extra leather and a bit of metal."
-	icon_state = "armoralt"
-	item_state = "armoralt"
+	icon_state = "stormcloak"
+	item_state = "stormcloak"
 	armor = list("melee" = 35, "bullet" = 35, "laser" = 0, "energy" = 40, "bomb" = 35, "bio" = 0, "rad" = 0, "fire" = 35, "acid" = 0)
 
 /obj/item/clothing/suit/armor/light/leather/stormcloak/officer
