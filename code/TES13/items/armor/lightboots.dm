@@ -47,14 +47,14 @@
 /obj/item/clothing/shoes/combat/leather/stormcloak
 	name = "stormcloak boots"
 	desc = "Standard Stormcloak boots made from leather."
-	icon_state = "jackboots"
-	item_state = "jackboots"
+	icon_state = "cuirassboots"
+	item_state = "cuirassboots"
 
 /obj/item/clothing/shoes/combat/light/leather/stormcloak/reinforced
 	name = "reinforced stormcloak boots"
 	desc = "Stormcloak boots reinforced with bits of metal."
-	icon_state = "jackboots"
-	item_state = "jackboots"
+	icon_state = "cuirassboots"
+	item_state = "cuirassboots"
 	armor = list("melee" = 35, "bullet" = 35, "laser" = 0, "energy" = 40, "bomb" = 35, "bio" = 0, "rad" = 0, "fire" = 35, "acid" = 0)
 
 /obj/item/clothing/shoes/combat/light/leather/stormcloak/officer
@@ -67,12 +67,12 @@
 /obj/item/clothing/shoes/combat/light/leather/whiteguard
 	name = "whiterun guard boots"
 	desc = "Standard issue Whiterun guard boots."
-	icon_state = "whiteguard"
-	item_state = "whiteguard"
+	icon_state = "cuirassboots"
+	item_state = "cuirassboots"
 	
 /obj/item/clothing/shoes/combat/light/leather/whiteguard/captain
 	name = "whiterun guard captain boots"
 	desc = "Whiterun guard boots reinforced with metal, the boots of choice for the Captain of the Guard."
-	icon_state = "whiteguard"
-	item_state = "whiteguard"
+	icon_state = "cuirassboots"
+	item_state = "cuirassboots"
 	armor = list("melee" = 40, "bullet" = 40, "laser" = 0, "energy" = 45, "bomb" = 40, "bio" = 0, "rad" = 0, "fire" = 40, "acid" = 0)
