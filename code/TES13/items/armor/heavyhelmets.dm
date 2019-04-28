@@ -26,8 +26,8 @@
 /obj/item/clothing/head/helmet/heavy/dwarven
 	name = "dwarven helmet"
 	desc = "A full, impenetrable Dwarven helmet."
-	icon_state = "helmet"
-	item_state = "helmet"
+	icon_state = "dwelm"
+	item_state = "dwelm"
 	armor = list("melee" = 70, "bullet" = 70, "laser" = 0, "energy" = 60, "bomb" = 75, "bio" = 0, "rad" = 0, "fire" = 75, "acid" = 0)
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
