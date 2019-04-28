@@ -67,7 +67,7 @@
 	armor = list("melee" = 40, "bullet" = 40, "laser" = 0,"energy" = 45, "bomb" = 40, "bio" = 0, "rad" = 0, "fire" = 40, "acid" = 0)
 
 /obj/item/clothing/head/helmet/light/leather/whiteguard
-	name = "whitergun guard helmet"
+	name = "whiterun guard helmet"
 	desc = "Standard Whiterun guard helmet made mostly from leather."
 	icon_state = "whiteguard"
 	item_state = "whiteguard"
@@ -75,7 +75,7 @@
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 
 /obj/item/clothing/head/helmet/light/leather/whiteguard/captain
-	name = "whitergun guard captain helmet"
+	name = "whiterun guard captain helmet"
 	desc = "A Whiterun guard helmet reinforced with metal and leather, worn by the Guard Captain."
 	icon_state = "whiteguard"
 	item_state = "whiteguard"
