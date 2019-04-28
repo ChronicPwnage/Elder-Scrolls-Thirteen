@@ -26,8 +26,8 @@
 /obj/item/clothing/gloves/combat/heavy/dwarven
 	name = "dwarven gauntlets"
 	desc = "Incredibly strong metal gauntlets forged from Dwarven metal."
-	icon_state = "black"
-	item_state = "blackgloves"
+	icon_state = "dwoves"
+	item_state = "dwoves"
 	armor = list("melee" = 70, "bullet" = 70, "laser" = 0, "energy" = 60, "bomb" = 75, "bio" = 0, "rad" = 0, "fire" = 75, "acid" = 0)
 
 /obj/item/clothing/gloves/combat/heavy/steel/imperial

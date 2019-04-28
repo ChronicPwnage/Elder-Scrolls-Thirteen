@@ -28,8 +28,8 @@
 /obj/item/clothing/shoes/combat/heavy/dwarven
 	name = "dwarven boots"
 	desc = "Sturdy and heavy metal boots fashioned from Dwarven metal."
-	icon_state = "jackboots"
-	item_state = "jackboots"
+	icon_state = "dwoots"
+	item_state = "dwoots"
 	armor = list("melee" = 70, "bullet" = 70, "laser" = 0, "energy" = 60, "bomb" = 75, "bio" = 0, "rad" = 0, "fire" = 75, "acid" = 0)
 
 /obj/item/clothing/shoes/combat/heavy/steel/imperial

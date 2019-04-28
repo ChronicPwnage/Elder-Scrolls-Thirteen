@@ -25,8 +25,8 @@
 /obj/item/clothing/suit/armor/heavy/dwarven
 	name = "dwarven armor"
 	desc = "An incredibly sturdy chestplate made from Dwarven metal."
-	icon_state = "armoralt"
-	item_state = "armoralt"
+	icon_state = "dwarmor"
+	item_state = "dwarmor"
 	armor = list("melee" = 70, "bullet" = 70, "laser" = 0, "energy" = 60, "bomb" = 75, "bio" = 0, "rad" = 0, "fire" = 75, "acid" = 0)
 
 /obj/item/clothing/suit/armor/heavy/steel/imperial
